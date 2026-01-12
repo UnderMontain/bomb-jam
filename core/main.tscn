@@ -1,0 +1,24 @@
+[gd_scene load_steps=8 format=3 uid="uid://crfdvfd3ero57"]
+
+[ext_resource type="Script" uid="uid://ddea6cstvsxtd" path="res://core/main.gd" id="1_3gdo0"]
+[ext_resource type="PackedScene" uid="uid://svgbetl60cqx" path="res://core/board.tscn" id="1_xiose"]
+[ext_resource type="PackedScene" uid="uid://ddrqy7o5j1gqa" path="res://grid/grid_cell.tscn" id="2_r77kf"]
+[ext_resource type="PackedScene" uid="uid://c44cllj2gd2lo" path="res://core/deck.tscn" id="4_xa854"]
+[ext_resource type="Script" uid="uid://boraphkmcs83t" path="res://Resource/card_data.gd" id="5_cus2n"]
+[ext_resource type="PackedScene" uid="uid://dbjbcuwcbbtr8" path="res://core/hand.tscn" id="5_kagtj"]
+[ext_resource type="Resource" uid="uid://0aay4u2rwvdl" path="res://Resource/card_L.tres" id="6_brq4u"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_3gdo0")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+
+[node name="Board" parent="." instance=ExtResource("1_xiose")]
+position = Vector2(-28, 1)
+cell_scene = ExtResource("2_r77kf")
+
+[node name="Deck" parent="." instance=ExtResource("4_xa854")]
+cards = Array[ExtResource("5_cus2n")]([ExtResource("6_brq4u")])
+
+[node name="Hand" parent="." instance=ExtResource("5_kagtj")]

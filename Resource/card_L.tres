@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://0aay4u2rwvdl"]
+
+[ext_resource type="Script" uid="uid://boraphkmcs83t" path="res://Resource/card_data.gd" id="1_sgmu3"]
+
+[resource]
+script = ExtResource("1_sgmu3")
+name = "Bomb L"
+shape = Array[Vector2i]([Vector2i(0, 0), Vector2i(1, 0), Vector2i(0, -1), Vector2i(0, -2)])
+damage = 1
+metadata/_custom_type_script = "uid://boraphkmcs83t"
