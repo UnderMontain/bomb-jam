@@ -1,24 +1,212 @@
-[gd_scene load_steps=8 format=3 uid="uid://crfdvfd3ero57"]
+[gd_scene load_steps=26 format=3 uid="uid://crfdvfd3ero57"]
 
-[ext_resource type="Script" uid="uid://ddea6cstvsxtd" path="res://core/main.gd" id="1_3gdo0"]
+[ext_resource type="Script" uid="uid://dex6mvovfc0t" path="res://core/main.gd" id="1_3gdo0"]
 [ext_resource type="PackedScene" uid="uid://svgbetl60cqx" path="res://core/board.tscn" id="1_xiose"]
+[ext_resource type="Texture2D" uid="uid://c85k6cbom54a5" path="res://Fondo.png" id="2_jsmgm"]
 [ext_resource type="PackedScene" uid="uid://ddrqy7o5j1gqa" path="res://grid/grid_cell.tscn" id="2_r77kf"]
 [ext_resource type="PackedScene" uid="uid://c44cllj2gd2lo" path="res://core/deck.tscn" id="4_xa854"]
-[ext_resource type="Script" uid="uid://boraphkmcs83t" path="res://Resource/card_data.gd" id="5_cus2n"]
+[ext_resource type="Script" uid="uid://btu57gnn5jlyv" path="res://Resource/card_data.gd" id="5_cus2n"]
 [ext_resource type="PackedScene" uid="uid://dbjbcuwcbbtr8" path="res://core/hand.tscn" id="5_kagtj"]
 [ext_resource type="Resource" uid="uid://0aay4u2rwvdl" path="res://Resource/card_L.tres" id="6_brq4u"]
+[ext_resource type="Texture2D" uid="uid://db47m2a0liqts" path="res://Card.png" id="8_brq4u"]
+[ext_resource type="Resource" uid="uid://tlh1ak8cdgra" path="res://Resource/card_I.tres" id="8_rayt5"]
+[ext_resource type="Script" uid="uid://bf8u7ajur2onf" path="res://core/card.gd" id="9_xhu5d"]
+[ext_resource type="Texture2D" uid="uid://b36h2sdl0b3v5" path="res://Bomb-Sheet.png" id="12_510js"]
+[ext_resource type="Script" uid="uid://dg6tqsf1m3qls" path="res://core/player.gd" id="13_7ua4h"]
+[ext_resource type="FontFile" uid="uid://cl83uo0avcov3" path="res://PeaberryBase.ttf" id="14_ntwa4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jsmgm"]
+font = ExtResource("14_ntwa4")
+font_color = Color(0.47838163, 0.7021949, 0.2555963, 1)
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ua4h"]
+atlas = ExtResource("12_510js")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ntwa4"]
+atlas = ExtResource("12_510js")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ge7io"]
+atlas = ExtResource("12_510js")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jeqa8"]
+atlas = ExtResource("12_510js")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g0q11"]
+atlas = ExtResource("12_510js")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lxu0y"]
+atlas = ExtResource("12_510js")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_slld4"]
+atlas = ExtResource("12_510js")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i2u5h"]
+atlas = ExtResource("12_510js")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7akvt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ua4h")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ntwa4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ge7io")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jeqa8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_g0q11")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lxu0y")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_slld4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i2u5h")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ua4h"]
+font = ExtResource("14_ntwa4")
+font_color = Color(0.47843137, 0.7019608, 0.25490198, 1)
+outline_size = 4
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_3gdo0")
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_jsmgm")
+
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
+zoom = Vector2(2.5, 2.5)
 
 [node name="Board" parent="." instance=ExtResource("1_xiose")]
-position = Vector2(-28, 1)
+position = Vector2(-25, 2)
 cell_scene = ExtResource("2_r77kf")
 
 [node name="Deck" parent="." instance=ExtResource("4_xa854")]
-cards = Array[ExtResource("5_cus2n")]([ExtResource("6_brq4u")])
+cards = Array[ExtResource("5_cus2n")]([ExtResource("6_brq4u"), ExtResource("8_rayt5")])
 
 [node name="Hand" parent="." instance=ExtResource("5_kagtj")]
+
+[node name="Card" type="Node2D" parent="."]
+position = Vector2(71.00001, -5.9999995)
+scale = Vector2(0.8, 0.8)
+script = ExtResource("9_xhu5d")
+
+[node name="Sprite2D" type="Sprite2D" parent="Card"]
+texture = ExtResource("8_brq4u")
+
+[node name="Marker2D" type="Marker2D" parent="Card"]
+position = Vector2(1.2499905, 31.25)
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="Control" type="Control" parent="Card"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="Cost" type="Label" parent="Card/Control"]
+layout_mode = 0
+offset_left = -52.500008
+offset_top = -52.5
+offset_right = -12.500008
+offset_bottom = -7.5
+text = "2"
+label_settings = SubResource("LabelSettings_jsmgm")
+horizontal_alignment = 1
+
+[node name="Damage" type="Label" parent="Card/Control"]
+layout_mode = 0
+offset_left = 9.999994
+offset_top = -52.5
+offset_right = 49.999992
+offset_bottom = -7.5
+text = "2"
+label_settings = SubResource("LabelSettings_jsmgm")
+horizontal_alignment = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Card"]
+position = Vector2(-28.750008, 54.999996)
+sprite_frames = SubResource("SpriteFrames_7akvt")
+autoplay = "default"
+frame_progress = 0.46392283
+
+[node name="Player" type="Node" parent="."]
+script = ExtResource("13_7ua4h")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+scale = Vector2(0.8, 0.8)
+mouse_filter = 2
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -157.5
+offset_top = -6.250001
+offset_right = -105.5
+offset_bottom = 16.75
+text = "Life 3"
+label_settings = SubResource("LabelSettings_7ua4h")
+horizontal_alignment = 1
+
+[node name="Cost" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -72.5
+offset_top = -82.5
+offset_right = -20.5
+offset_bottom = -59.5
+text = "cost 0"
+label_settings = SubResource("LabelSettings_7ua4h")
+
+[node name="Cost3" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = -157.5
+offset_top = 23.749992
+offset_right = -105.5
+offset_bottom = 46.749992
+text = "Wave 99"
+label_settings = SubResource("LabelSettings_7ua4h")
+
+[node name="Cost2" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = -63.75
+offset_top = -16.25
+offset_right = 3.25
+offset_bottom = 6.75
+text = "YOU DIE"
+label_settings = SubResource("LabelSettings_7ua4h")
+
+[node name="Cost4" type="Label" parent="Control"]
+visible = false
+layout_mode = 0
+offset_left = 33.75
+offset_top = -82.5
+offset_right = 212.75
+offset_bottom = -59.5
+scale = Vector2(0.6, 0.6)
+text = "Card random updated"
+label_settings = SubResource("LabelSettings_7ua4h")

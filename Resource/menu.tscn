@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://don5ojf2cew3p"]
+
+[ext_resource type="Texture2D" uid="uid://o5dix115re7a" path="res://Resource/Fondo.png" id="1_r5bmn"]
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_r5bmn")

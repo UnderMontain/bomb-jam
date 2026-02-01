@@ -1,0 +1,9 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnd583ggekiml"]
+
+[ext_resource type="Script" uid="uid://camp5gjx1gn5t" path="res://music_manager.gd" id="1_c7q73"]
+[ext_resource type="AudioStream" uid="uid://c5casaoagcoly" path="res://bruno.mp3" id="2_cd7xo"]
+[ext_resource type="AudioStream" uid="uid://qn6cntmsji8d" path="res://bata.mp3" id="3_m6xkc"]
+
+[node name="Node" type="Node"]
+script = ExtResource("1_c7q73")
+tracks = Array[AudioStream]([ExtResource("2_cd7xo"), ExtResource("3_m6xkc")])

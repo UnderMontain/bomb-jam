@@ -1,12 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://ddrqy7o5j1gqa"]
+[gd_scene load_steps=5 format=3 uid="uid://ddrqy7o5j1gqa"]
 
-[ext_resource type="Script" uid="uid://1onwti2vfkex" path="res://grid/grid_cell.gd" id="1_15evq"]
+[ext_resource type="Script" uid="uid://cw5js3fodwden" path="res://grid/grid_cell.gd" id="1_15evq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2yhut"]
 size = Vector2(16, 16)
+
+[sub_resource type="Gradient" id="Gradient_15evq"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2migw"]
+gradient = SubResource("Gradient_15evq")
+width = 14
+height = 14
+fill_from = Vector2(0.5597484, 0.4937107)
 
 [node name="Cell" type="Area2D"]
 script = ExtResource("1_15evq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2yhut")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_2migw")
+
+[connection signal="mouse_entered" from="." to="." method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_mouse_exited"]

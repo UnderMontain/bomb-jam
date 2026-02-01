@@ -9,13 +9,17 @@ class_name Board
 
 var cells := {}
 var cell_data: Dictionary[Vector2i, CellData] = {}
+const EXPLOTION = preload("uid://cnngjbksnqusx")
+
 
 func _ready() -> void:
 	build_grid()
 
 func build_grid():
 	var cell_size = Vector2(16,16)
-	var origin = (board_sprite.texture.get_size() / -2) + cell_size / 2
+	#board_sprite.texture.get_size()
+	var origin = (board_sprite.texture.get_size() / -2) + cell_size 
+	origin += Vector2(0,3)
 	for y in grid_size.y:
 		for x in grid_size.x:
 			var cell = cell_scene.instantiate() as GridCell
@@ -44,12 +48,33 @@ func add_enemy(coord: Vector2i, enemy: Node2D):
 
 func aplay_card(origin:Vector2i, card:CardData):
 	var cells_aplay = check_cells(origin, card.shape)
-	print_debug(cells_aplay) 
+	print_debug(cells_aplay)
+	for cell in cells_aplay:
+		var explotion = EXPLOTION.instantiate() as AnimatedSprite2D
+		explotion.global_position = cell_data[cell].coord_world
+		add_child(explotion)
+		explotion.animation_finished.connect(explotion.queue_free)
 	for cell in cells_aplay:
 		if cell_data[cell].conent != null:
-			cell_data[cell].conent.take_damage()
-	
-	pass
+			cell_data[cell].conent.died.connect(on_enemy_die)
+			await cell_data[cell].conent.take_damage(cell,card.damage)
+
+func on_enemy_die(cell_position : Vector2i):
+	cell_data[cell_position].conent = null
+
+func get_enemies()-> Array[Enemy]:
+	var result:Array[Enemy]
+	for cell in cell_data:
+		if cell_data[cell].conent != null:
+			result.append(cell_data[cell].conent)
+	return result
+
+func get_cell_empty()-> Array[Vector2i]:
+	var result:Array[Vector2i]
+	for cell in cell_data:
+		if cell_data[cell].conent == null:
+			result.append(cell)
+	return result
 
 func check_cells(origin: Vector2i, shape: Array[Vector2i]) -> Array[Vector2i]:
 	var results : Array[Vector2i]

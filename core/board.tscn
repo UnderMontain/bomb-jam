@@ -1,17 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://svgbetl60cqx"]
+[gd_scene load_steps=3 format=3 uid="uid://svgbetl60cqx"]
 
-[ext_resource type="Script" uid="uid://dixwelcex8gfs" path="res://autoload/board.gd" id="1_ccdsy"]
-[ext_resource type="Texture2D" uid="uid://dawxxflscgelm" path="res://TX Tileset Grass.png" id="2_tln8a"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_qt3id"]
-atlas = ExtResource("2_tln8a")
-region = Rect2(80, 32, 80, 80)
+[ext_resource type="Script" uid="uid://ck0bjq24nqpy2" path="res://autoload/board.gd" id="1_ccdsy"]
+[ext_resource type="Texture2D" uid="uid://c63pqnfb4sc6s" path="res://Tablero.png" id="2_tln8a"]
 
 [node name="Board" type="Node2D"]
 script = ExtResource("1_ccdsy")
 grid_size = Vector2i(5, 5)
 
 [node name="BoardSprite" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_qt3id")
+texture = ExtResource("2_tln8a")
 
 [node name="Grid" type="Node2D" parent="."]
