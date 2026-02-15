@@ -1,0 +1,88 @@
+[gd_scene load_steps=9 format=3 uid="uid://bb6dj1mrey7yk"]
+
+[ext_resource type="Texture2D" uid="uid://ccmk11s11yti6" path="res://Sprite/click-Sheet.png" id="1_1pksb"]
+[ext_resource type="Texture2D" uid="uid://brk0ohycsde8l" path="res://Sprite/cursor-Sheet.png" id="2_6ug8r"]
+[ext_resource type="Script" uid="uid://i7b54lctv6sf" path="res://core/texture_button.gd" id="3_6ug8r"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8s36p"]
+atlas = ExtResource("1_1pksb")
+region = Rect2(0, 0, 390, 308)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ug8r"]
+atlas = ExtResource("1_1pksb")
+region = Rect2(0, 0, 390, 308)
+
+[sub_resource type="Animation" id="Animation_6ug8r"]
+resource_name = "button_press"
+length = 0.35
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_pressed:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.050371587, 0.10074318, 0.15268888, 0.20620872, 0.26759908),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Rect2(0, 0, 390, 308), Rect2(390, 0, 390, 308), Rect2(780, 0, 390, 308), Rect2(1170, 0, 390, 308), Rect2(1560, 0, 390, 308), Rect2(1950, 0, 390, 308)]
+}
+
+[sub_resource type="Animation" id="Animation_8s36p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:texture_normal:region")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 390, 308)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:texture_pressed:region")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Rect2(0, 0, 390, 308)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8s36p"]
+_data = {
+&"RESET": SubResource("Animation_8s36p"),
+&"button_press": SubResource("Animation_6ug8r")
+}
+
+[node name="ButtonAnimated" type="TextureButton"]
+custom_minimum_size = Vector2(40, 40)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -195.0
+offset_top = -154.0
+offset_right = 195.0
+offset_bottom = 154.0
+grow_horizontal = 2
+grow_vertical = 2
+toggle_mode = true
+texture_normal = SubResource("AtlasTexture_8s36p")
+texture_pressed = SubResource("AtlasTexture_6ug8r")
+texture_hover = ExtResource("2_6ug8r")
+ignore_texture_size = true
+stretch_mode = 5
+script = ExtResource("3_6ug8r")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8s36p")
+}

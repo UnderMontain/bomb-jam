@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="JamBomb"
-run/main_scene="uid://crfdvfd3ero57"
+run/main_scene="uid://don5ojf2cew3p"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -19,14 +19,19 @@ config/icon="res://icon.svg"
 
 GameManager="*res://autoload/game_manager.gd"
 Audio="*res://Audio.tscn"
+SceneManager="*res://autoload/scene_manager.gd"
+
+[debug]
+
+settings/stdout/print_fps=true
 
 [display]
 
 window/size/viewport_width=640
 window/size/viewport_height=360
-window/size/mode=1
-window/stretch/mode="viewport"
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
+window/vsync/vsync_mode=0
 
 [rendering]
 
