@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://cnngjbksnqusx"]
+[gd_scene load_steps=22 format=3 uid="uid://cnngjbksnqusx"]
 
 [ext_resource type="Texture2D" uid="uid://cp1073807o4e5" path="res://Explo.png" id="1_eodo4"]
 
@@ -115,8 +115,34 @@ animations = [{
 "speed": 13.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_m4wys"]
+atlas = ExtResource("1_eodo4")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="Curve" id="Curve_aao8i"]
+_data = [Vector2(0, 0.26966298), 0.0, 0.0, 0, 0, Vector2(0.45864666, 0.13483155), -0.29887637, -0.29887637, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_coyjd"]
+curve = SubResource("Curve_aao8i")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_5llvn"]
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 29.24
+initial_velocity_max = 81.88
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_coyjd")
+turbulence_enabled = true
+
 [node name="Explotion" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_m4wys")
 autoplay = "default"
-frame = 14
-frame_progress = 1.0
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 20
+texture = SubResource("AtlasTexture_m4wys")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_5llvn")

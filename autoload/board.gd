@@ -6,14 +6,19 @@ class_name Board
 
 @onready var board_sprite: Sprite2D = $BoardSprite
 @onready var grid: Node2D = $Grid
+@onready var tile_map_layer: TileMapLayer = $TileMapLayer
 
-var cells := {}
+var cells : Dictionary[Vector2i,GridCell]
 var cell_data: Dictionary[Vector2i, CellData] = {}
+
 const EXPLOTION = preload("uid://cnngjbksnqusx")
 
 
 func _ready() -> void:
 	build_grid()
+
+func _process(delta: float) -> void:
+	get_cell()
 
 func build_grid():
 	var cell_size = Vector2(16,16)
@@ -29,11 +34,29 @@ func build_grid():
 				y * cell_size.y
 			)
 			cell.clicked.connect(_on_cell_clicked)
+			cell.hovered.connect(GameManager._on_cell_hovered)
+			cell.unhovered.connect(GameManager._on_cell_unhovered)
 			grid.add_child(cell)
 			cells[cell.coord] = cell
 			cell_data[cell.coord] = CellData.new()
 			cell_data[cell.coord].conent = null
 			cell_data[cell.coord].coord_world = cell.position
+
+func show_preview(hovered_cell:Vector2i, card: CardData):
+	clear_preview()
+	var result = check_cells(hovered_cell,card.shape_rotated)
+	for cell in result:
+		cells[cell].preview(true)
+
+func get_cell():
+	var mouse_position = get_global_mouse_position()
+	var cell = tile_map_layer.to_local(mouse_position)
+	cell = tile_map_layer.local_to_map(cell)
+	print(cell)
+
+func clear_preview():
+	for cell in cells:
+		cells[cell].preview(false)
 
 func _on_cell_clicked(coord: Vector2i):
 	GameManager.on_cell_clicked(coord)
@@ -47,12 +70,13 @@ func add_enemy(coord: Vector2i, enemy: Node2D):
 		add_child(enemy)
 
 func aplay_card(origin:Vector2i, card:CardData):
-	var cells_aplay = check_cells(origin, card.shape)
+	var cells_aplay = check_cells(origin, card.shape_rotated)
 	print_debug(cells_aplay)
 	for cell in cells_aplay:
 		var explotion = EXPLOTION.instantiate() as AnimatedSprite2D
 		explotion.global_position = cell_data[cell].coord_world
 		add_child(explotion)
+		explotion.get_node("GPUParticles2D").restart()
 		explotion.animation_finished.connect(explotion.queue_free)
 	for cell in cells_aplay:
 		if cell_data[cell].conent != null:

@@ -1,13 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://svgbetl60cqx"]
+[gd_scene load_steps=5 format=3 uid="uid://svgbetl60cqx"]
 
 [ext_resource type="Script" uid="uid://ck0bjq24nqpy2" path="res://autoload/board.gd" id="1_ccdsy"]
 [ext_resource type="Texture2D" uid="uid://c63pqnfb4sc6s" path="res://Tablero.png" id="2_tln8a"]
+[ext_resource type="PackedScene" uid="uid://ddrqy7o5j1gqa" path="res://grid/grid_cell.tscn" id="3_qt3id"]
+
+[sub_resource type="TileSet" id="TileSet_tln8a"]
 
 [node name="Board" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_ccdsy")
 grid_size = Vector2i(5, 5)
 
 [node name="BoardSprite" type="Sprite2D" parent="."]
 texture = ExtResource("2_tln8a")
 
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+position = Vector2(8, 3)
+tile_set = SubResource("TileSet_tln8a")
+
 [node name="Grid" type="Node2D" parent="."]
+visible = false
+
+[node name="Cell" parent="Grid" instance=ExtResource("3_qt3id")]
+position = Vector2(8, 8)

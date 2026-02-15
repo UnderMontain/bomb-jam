@@ -58,12 +58,12 @@ animations = [{
 font = ExtResource("3_0ifcb")
 
 [node name="Enemy" type="Node2D"]
-scale = Vector2(0.5, 0.5)
 script = ExtResource("1_5bdg5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_uwg5a")
 autoplay = "default"
 frame_progress = 0.76405066

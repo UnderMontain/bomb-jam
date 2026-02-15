@@ -1,7 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://crfdvfd3ero57"]
+[gd_scene load_steps=27 format=3 uid="uid://crfdvfd3ero57"]
 
 [ext_resource type="Script" uid="uid://dex6mvovfc0t" path="res://core/main.gd" id="1_3gdo0"]
 [ext_resource type="PackedScene" uid="uid://svgbetl60cqx" path="res://core/board.tscn" id="1_xiose"]
+[ext_resource type="Script" uid="uid://co8dr5fgmmewk" path="res://core/ui_manager.gd" id="2_ge7io"]
 [ext_resource type="Texture2D" uid="uid://c85k6cbom54a5" path="res://Fondo.png" id="2_jsmgm"]
 [ext_resource type="PackedScene" uid="uid://ddrqy7o5j1gqa" path="res://grid/grid_cell.tscn" id="2_r77kf"]
 [ext_resource type="PackedScene" uid="uid://c44cllj2gd2lo" path="res://core/deck.tscn" id="4_xa854"]
@@ -14,6 +15,11 @@
 [ext_resource type="Texture2D" uid="uid://b36h2sdl0b3v5" path="res://Bomb-Sheet.png" id="12_510js"]
 [ext_resource type="Script" uid="uid://dg6tqsf1m3qls" path="res://core/player.gd" id="13_7ua4h"]
 [ext_resource type="FontFile" uid="uid://cl83uo0avcov3" path="res://PeaberryBase.ttf" id="14_ntwa4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_7ua4h"]
+font = ExtResource("14_ntwa4")
+font_color = Color(0.47843137, 0.7019608, 0.25490198, 1)
+outline_size = 4
 
 [sub_resource type="LabelSettings" id="LabelSettings_jsmgm"]
 font = ExtResource("14_ntwa4")
@@ -85,23 +91,97 @@ animations = [{
 "speed": 12.0
 }]
 
-[sub_resource type="LabelSettings" id="LabelSettings_7ua4h"]
-font = ExtResource("14_ntwa4")
-font_color = Color(0.47843137, 0.7019608, 0.25490198, 1)
-outline_size = 4
-
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "GUI")]
 script = ExtResource("1_3gdo0")
+player = NodePath("Player")
+GUI = NodePath("CanvasLayer/GUI")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="GUI" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_ge7io")
+
+[node name="HandUI" type="Control" parent="CanvasLayer/GUI"]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 455.0
+offset_top = 277.0
+offset_right = 505.0
+offset_bottom = 327.0
+mouse_filter = 1
+
+[node name="Life" type="Label" parent="CanvasLayer/GUI"]
+layout_mode = 0
+offset_left = 187.5
+offset_top = 32.0
+offset_right = 239.5
+offset_bottom = 55.0
+text = "Life 3"
+label_settings = SubResource("LabelSettings_7ua4h")
+horizontal_alignment = 1
+
+[node name="Cost" type="Label" parent="CanvasLayer/GUI"]
+layout_mode = 0
+offset_left = 223.0
+offset_top = 8.0
+offset_right = 275.0
+offset_bottom = 31.0
+text = "cost 0"
+label_settings = SubResource("LabelSettings_7ua4h")
+
+[node name="Wave" type="Label" parent="CanvasLayer/GUI"]
+layout_mode = 0
+offset_left = 249.5
+offset_top = 31.5
+offset_right = 314.5
+offset_bottom = 54.5
+text = "Wave 99"
+label_settings = SubResource("LabelSettings_7ua4h")
+
+[node name="GameOver" type="Label" parent="CanvasLayer/GUI"]
+visible = false
+layout_mode = 0
+offset_left = 53.0
+offset_top = 75.0
+offset_right = 120.0
+offset_bottom = 98.0
+text = "YOU DIE"
+label_settings = SubResource("LabelSettings_7ua4h")
+
+[node name="UpdateCard" type="Label" parent="CanvasLayer/GUI"]
+visible = false
+layout_mode = 0
+offset_left = 33.5
+offset_top = 7.0
+offset_right = 212.5
+offset_bottom = 30.0
+scale = Vector2(0.6, 0.6)
+text = "Card random updated"
+label_settings = SubResource("LabelSettings_7ua4h")
+
+[node name="PositionCard" type="Control" parent="CanvasLayer/GUI"]
+anchors_preset = 0
+offset_left = 341.0
+offset_top = 96.0
+offset_right = 381.0
+offset_bottom = 136.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_jsmgm")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
+process_callback = 0
 
 [node name="Board" parent="." instance=ExtResource("1_xiose")]
-position = Vector2(-25, 2)
+position = Vector2(-51, 2)
 cell_scene = ExtResource("2_r77kf")
 
 [node name="Deck" parent="." instance=ExtResource("4_xa854")]
@@ -110,8 +190,8 @@ cards = Array[ExtResource("5_cus2n")]([ExtResource("6_brq4u"), ExtResource("8_ra
 [node name="Hand" parent="." instance=ExtResource("5_kagtj")]
 
 [node name="Card" type="Node2D" parent="."]
-position = Vector2(71.00001, -5.9999995)
-scale = Vector2(0.8, 0.8)
+visible = false
+position = Vector2(48, -1)
 script = ExtResource("9_xhu5d")
 
 [node name="Sprite2D" type="Sprite2D" parent="Card"]
@@ -153,60 +233,3 @@ frame_progress = 0.46392283
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("13_7ua4h")
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-scale = Vector2(0.8, 0.8)
-mouse_filter = 2
-
-[node name="Label" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = -157.5
-offset_top = -6.250001
-offset_right = -105.5
-offset_bottom = 16.75
-text = "Life 3"
-label_settings = SubResource("LabelSettings_7ua4h")
-horizontal_alignment = 1
-
-[node name="Cost" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = -72.5
-offset_top = -82.5
-offset_right = -20.5
-offset_bottom = -59.5
-text = "cost 0"
-label_settings = SubResource("LabelSettings_7ua4h")
-
-[node name="Cost3" type="Label" parent="Control"]
-layout_mode = 0
-offset_left = -157.5
-offset_top = 23.749992
-offset_right = -105.5
-offset_bottom = 46.749992
-text = "Wave 99"
-label_settings = SubResource("LabelSettings_7ua4h")
-
-[node name="Cost2" type="Label" parent="Control"]
-visible = false
-layout_mode = 0
-offset_left = -63.75
-offset_top = -16.25
-offset_right = 3.25
-offset_bottom = 6.75
-text = "YOU DIE"
-label_settings = SubResource("LabelSettings_7ua4h")
-
-[node name="Cost4" type="Label" parent="Control"]
-visible = false
-layout_mode = 0
-offset_left = 33.75
-offset_top = -82.5
-offset_right = 212.75
-offset_bottom = -59.5
-scale = Vector2(0.6, 0.6)
-text = "Card random updated"
-label_settings = SubResource("LabelSettings_7ua4h")

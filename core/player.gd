@@ -3,6 +3,8 @@ class_name Player
 
 var life: int = 5
 
+signal player_life_changed(amount)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	GameManager.player = self
@@ -11,3 +13,4 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func take_damage(dmg:int):
 	life -= dmg
+	player_life_changed.emit(life)
