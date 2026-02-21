@@ -42,6 +42,8 @@ func _start():
 func _Play():
 	state = GameState.DRAWING_CARD
 	hand._pick_card(deck)
+	hand._pick_card(deck)
+	hand._pick_card(deck)
 	#card.show_preview(hand.current_card)
 	state = GameState.AIMING
 
@@ -61,10 +63,10 @@ func _input(event: InputEvent) -> void:
 					current_board.show_preview(last_coord_cell, hand.current_card)
 
 func _on_cell_hovered(coord: Vector2i):
-	if !has_hovered_cell:
-		has_hovered_cell = true
-		last_coord_cell = coord
-		current_board.show_preview(coord,hand.current_card)
+	
+	has_hovered_cell = true
+	last_coord_cell = coord
+	current_board.show_preview(coord,hand.current_card)
 
 func _on_cell_unhovered(coord: Vector2i):
 	if has_hovered_cell:
@@ -72,7 +74,7 @@ func _on_cell_unhovered(coord: Vector2i):
 		last_coord_cell = coord
 		current_board.clear_preview()
 
-func on_cell_clicked (coord: Vector2i):
+func _on_cell_clicked (coord: Vector2i):
 	if state == GameState.AIMING:
 		print_debug(coord)
 		state = GameState.RESOLVING_CARD

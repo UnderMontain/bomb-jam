@@ -1,19 +1,19 @@
-[gd_scene load_steps=27 format=3 uid="uid://crfdvfd3ero57"]
+[gd_scene format=3 uid="uid://crfdvfd3ero57"]
 
-[ext_resource type="Script" uid="uid://dex6mvovfc0t" path="res://core/main.gd" id="1_3gdo0"]
+[ext_resource type="Script" uid="uid://b6lnkaa2ddwm3" path="res://core/main.gd" id="1_3gdo0"]
 [ext_resource type="PackedScene" uid="uid://svgbetl60cqx" path="res://core/board.tscn" id="1_xiose"]
-[ext_resource type="Script" uid="uid://co8dr5fgmmewk" path="res://core/ui_manager.gd" id="2_ge7io"]
+[ext_resource type="Script" uid="uid://chwfdj4l0c3nu" path="res://core/ui_manager.gd" id="2_ge7io"]
 [ext_resource type="Texture2D" uid="uid://c85k6cbom54a5" path="res://Fondo.png" id="2_jsmgm"]
 [ext_resource type="PackedScene" uid="uid://ddrqy7o5j1gqa" path="res://grid/grid_cell.tscn" id="2_r77kf"]
 [ext_resource type="PackedScene" uid="uid://c44cllj2gd2lo" path="res://core/deck.tscn" id="4_xa854"]
-[ext_resource type="Script" uid="uid://btu57gnn5jlyv" path="res://Resource/card_data.gd" id="5_cus2n"]
+[ext_resource type="Script" uid="uid://p7lu0ibbbg0s" path="res://Resource/card_data.gd" id="5_cus2n"]
 [ext_resource type="PackedScene" uid="uid://dbjbcuwcbbtr8" path="res://core/hand.tscn" id="5_kagtj"]
 [ext_resource type="Resource" uid="uid://0aay4u2rwvdl" path="res://Resource/card_L.tres" id="6_brq4u"]
 [ext_resource type="Texture2D" uid="uid://db47m2a0liqts" path="res://Card.png" id="8_brq4u"]
 [ext_resource type="Resource" uid="uid://tlh1ak8cdgra" path="res://Resource/card_I.tres" id="8_rayt5"]
-[ext_resource type="Script" uid="uid://bf8u7ajur2onf" path="res://core/card.gd" id="9_xhu5d"]
+[ext_resource type="Script" uid="uid://dv5n4uhi6ci67" path="res://core/card.gd" id="9_xhu5d"]
 [ext_resource type="Texture2D" uid="uid://b36h2sdl0b3v5" path="res://Bomb-Sheet.png" id="12_510js"]
-[ext_resource type="Script" uid="uid://dg6tqsf1m3qls" path="res://core/player.gd" id="13_7ua4h"]
+[ext_resource type="Script" uid="uid://yse84ek06upa" path="res://core/player.gd" id="13_7ua4h"]
 [ext_resource type="FontFile" uid="uid://cl83uo0avcov3" path="res://PeaberryBase.ttf" id="14_ntwa4"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_7ua4h"]
@@ -91,14 +91,14 @@ animations = [{
 "speed": 12.0
 }]
 
-[node name="Main" type="Node2D" node_paths=PackedStringArray("player", "GUI")]
+[node name="Main" type="Node2D" unique_id=1782264961 node_paths=PackedStringArray("player", "GUI")]
 script = ExtResource("1_3gdo0")
 player = NodePath("Player")
 GUI = NodePath("CanvasLayer/GUI")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1170183774]
 
-[node name="GUI" type="Control" parent="CanvasLayer"]
+[node name="GUI" type="Control" parent="CanvasLayer" unique_id=1656707946]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -108,7 +108,7 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("2_ge7io")
 
-[node name="HandUI" type="Control" parent="CanvasLayer/GUI"]
+[node name="HandUI" type="Control" parent="CanvasLayer/GUI" unique_id=215368016]
 layout_mode = 1
 anchors_preset = 0
 offset_left = 455.0
@@ -117,7 +117,7 @@ offset_right = 505.0
 offset_bottom = 327.0
 mouse_filter = 1
 
-[node name="Life" type="Label" parent="CanvasLayer/GUI"]
+[node name="Life" type="Label" parent="CanvasLayer/GUI" unique_id=1206794456]
 layout_mode = 0
 offset_left = 187.5
 offset_top = 32.0
@@ -127,7 +127,7 @@ text = "Life 3"
 label_settings = SubResource("LabelSettings_7ua4h")
 horizontal_alignment = 1
 
-[node name="Cost" type="Label" parent="CanvasLayer/GUI"]
+[node name="Cost" type="Label" parent="CanvasLayer/GUI" unique_id=831097614]
 layout_mode = 0
 offset_left = 223.0
 offset_top = 8.0
@@ -136,7 +136,7 @@ offset_bottom = 31.0
 text = "cost 0"
 label_settings = SubResource("LabelSettings_7ua4h")
 
-[node name="Wave" type="Label" parent="CanvasLayer/GUI"]
+[node name="Wave" type="Label" parent="CanvasLayer/GUI" unique_id=1688646617]
 layout_mode = 0
 offset_left = 249.5
 offset_top = 31.5
@@ -145,7 +145,7 @@ offset_bottom = 54.5
 text = "Wave 99"
 label_settings = SubResource("LabelSettings_7ua4h")
 
-[node name="GameOver" type="Label" parent="CanvasLayer/GUI"]
+[node name="GameOver" type="Label" parent="CanvasLayer/GUI" unique_id=1128635347]
 visible = false
 layout_mode = 0
 offset_left = 53.0
@@ -155,7 +155,7 @@ offset_bottom = 98.0
 text = "YOU DIE"
 label_settings = SubResource("LabelSettings_7ua4h")
 
-[node name="UpdateCard" type="Label" parent="CanvasLayer/GUI"]
+[node name="UpdateCard" type="Label" parent="CanvasLayer/GUI" unique_id=788807300]
 visible = false
 layout_mode = 0
 offset_left = 33.5
@@ -166,46 +166,46 @@ scale = Vector2(0.6, 0.6)
 text = "Card random updated"
 label_settings = SubResource("LabelSettings_7ua4h")
 
-[node name="PositionCard" type="Control" parent="CanvasLayer/GUI"]
+[node name="PositionCard" type="Control" parent="CanvasLayer/GUI" unique_id=1608037674]
 anchors_preset = 0
 offset_left = 341.0
 offset_top = 96.0
 offset_right = 381.0
 offset_bottom = 136.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1097003032]
 texture = ExtResource("2_jsmgm")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1467866459]
 zoom = Vector2(2, 2)
 process_callback = 0
 
-[node name="Board" parent="." instance=ExtResource("1_xiose")]
+[node name="Board" parent="." unique_id=2034127296 instance=ExtResource("1_xiose")]
 position = Vector2(-51, 2)
 cell_scene = ExtResource("2_r77kf")
 
-[node name="Deck" parent="." instance=ExtResource("4_xa854")]
+[node name="Deck" parent="." unique_id=2145467262 instance=ExtResource("4_xa854")]
 cards = Array[ExtResource("5_cus2n")]([ExtResource("6_brq4u"), ExtResource("8_rayt5")])
 
-[node name="Hand" parent="." instance=ExtResource("5_kagtj")]
+[node name="Hand" parent="." unique_id=28306825 instance=ExtResource("5_kagtj")]
 
-[node name="Card" type="Node2D" parent="."]
+[node name="Card" type="Node2D" parent="." unique_id=1933370440]
 visible = false
 position = Vector2(48, -1)
 script = ExtResource("9_xhu5d")
 
-[node name="Sprite2D" type="Sprite2D" parent="Card"]
+[node name="Sprite2D" type="Sprite2D" parent="Card" unique_id=1412083103]
 texture = ExtResource("8_brq4u")
 
-[node name="Marker2D" type="Marker2D" parent="Card"]
+[node name="Marker2D" type="Marker2D" parent="Card" unique_id=1037386591]
 position = Vector2(1.2499905, 31.25)
 scale = Vector2(0.99999994, 0.99999994)
 
-[node name="Control" type="Control" parent="Card"]
+[node name="Control" type="Control" parent="Card" unique_id=1814232301]
 layout_mode = 3
 anchors_preset = 0
 
-[node name="Cost" type="Label" parent="Card/Control"]
+[node name="Cost" type="Label" parent="Card/Control" unique_id=1415259451]
 layout_mode = 0
 offset_left = -52.500008
 offset_top = -52.5
@@ -215,7 +215,7 @@ text = "2"
 label_settings = SubResource("LabelSettings_jsmgm")
 horizontal_alignment = 1
 
-[node name="Damage" type="Label" parent="Card/Control"]
+[node name="Damage" type="Label" parent="Card/Control" unique_id=1775734304]
 layout_mode = 0
 offset_left = 9.999994
 offset_top = -52.5
@@ -225,11 +225,11 @@ text = "2"
 label_settings = SubResource("LabelSettings_jsmgm")
 horizontal_alignment = 1
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Card"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Card" unique_id=1597253051]
 position = Vector2(-28.750008, 54.999996)
 sprite_frames = SubResource("SpriteFrames_7akvt")
 autoplay = "default"
 frame_progress = 0.46392283
 
-[node name="Player" type="Node" parent="."]
+[node name="Player" type="Node" parent="." unique_id=184404170]
 script = ExtResource("13_7ua4h")

@@ -1,14 +1,10 @@
-[gd_scene format=4 uid="uid://svgbetl60cqx"]
+[gd_resource type="TileSet" format=3 uid="uid://dsxvn84tpp3qy"]
 
-[ext_resource type="Script" uid="uid://beo5pprn8yo68" path="res://autoload/board.gd" id="1_ccdsy"]
-[ext_resource type="Texture2D" uid="uid://c63pqnfb4sc6s" path="res://Tablero.png" id="2_tln8a"]
-[ext_resource type="TileSet" uid="uid://dsxvn84tpp3qy" path="res://Resource/tile_map.tres" id="3_ic0bv"]
-[ext_resource type="Texture2D" uid="uid://bvrlevdcrd1i5" path="res://TX Tileset Grass.png" id="4_rhq0n"]
+[ext_resource type="Texture2D" uid="uid://bvrlevdcrd1i5" path="res://TX Tileset Grass.png" id="1_oglm5"]
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rhq0n"]
-texture = ExtResource("4_rhq0n")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gd7td"]
+texture = ExtResource("1_oglm5")
 0:0/0 = 0
-0:0/0/modulate = Color(1, 1, 1, 0.6039216)
 1:0/0 = 0
 2:0/0 = 0
 3:0/0 = 0
@@ -265,23 +261,5 @@ texture = ExtResource("4_rhq0n")
 14:15/0 = 0
 15:15/0 = 0
 
-[sub_resource type="TileSet" id="TileSet_0p8uj"]
-sources/2 = SubResource("TileSetAtlasSource_rhq0n")
-
-[node name="Board" type="Node2D" unique_id=282792504]
-process_mode = 3
-script = ExtResource("1_ccdsy")
-grid_size = Vector2i(5, 5)
-
-[node name="BoardSprite" type="Sprite2D" parent="." unique_id=691246373]
-visible = false
-texture = ExtResource("2_tln8a")
-
-[node name="TileMapBoard" type="TileMapLayer" parent="." unique_id=1230071170]
-tile_map_data = PackedByteArray("AAAAAAAAAAACAAoAAAD//wAAAAABAAoAAAD/////AAAOAAkAAAAAAP//AAACAAkAAAABAAAAAAADAAoAAAACAAAAAAAFAA4AAAACAP//AAAFAA0AAAABAP//AAADAAkAAAABAP7/AAADAAgAAAACAP7/AAAFAAwAAAAAAP7/AAACAAgAAAD///7/AAABAAgAAAD+//7/AAAPAAkAAAD+////AAAAAAkAAAD+/wAAAAAAAAoAAAD+/wEAAAAAAAsAAAD//wEAAAABAAsAAAAAAAEAAAACAAsAAAABAAEAAAADAAsAAAACAAEAAAAJAA4AAAD+/wIAAAAAAAgAAAD//wIAAAABAAgAAAAAAAIAAAACAAgAAAABAAIAAAADAAgAAAACAAIAAAACAAwAAAA=")
-tile_set = ExtResource("3_ic0bv")
-
-[node name="TileMapPreview" type="TileMapLayer" parent="." unique_id=230338157]
-tile_set = SubResource("TileSet_0p8uj")
-
-[node name="Grid" type="Node2D" parent="." unique_id=1276212841]
+[resource]
+sources/0 = SubResource("TileSetAtlasSource_gd7td")

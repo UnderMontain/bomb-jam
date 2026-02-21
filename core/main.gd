@@ -20,8 +20,10 @@ func _ready() -> void:
 	GameManager.current_main = self
 	GameManager.deck = deck
 	GameManager.hand = hand
-	#GameManager.card = card
 	GameManager.current_board = board
+	board.hovered.connect(GameManager._on_cell_hovered)
+	board.cell_clicked.connect(GameManager._on_cell_clicked)
+	#GameManager.card = card
 	#GameManager._add_enemy()
 	hand.card_drawed.connect(add_card)
 	GameManager.wave_changed.connect(GUI.update_wave)

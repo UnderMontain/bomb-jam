@@ -1,6 +1,6 @@
-[gd_scene load_steps=12 format=3 uid="uid://bn4yfwn686x1i"]
+[gd_scene format=3 uid="uid://bn4yfwn686x1i"]
 
-[ext_resource type="Script" uid="uid://dtp1rvn5q4kwt" path="res://Entities/enemy.gd" id="1_5bdg5"]
+[ext_resource type="Script" uid="uid://dsb013abu1m5o" path="res://Entities/enemy.gd" id="1_5bdg5"]
 [ext_resource type="Texture2D" uid="uid://lmlij1i02nx" path="res://Calavera.png" id="2_5bdg5"]
 [ext_resource type="FontFile" uid="uid://cl83uo0avcov3" path="res://PeaberryBase.ttf" id="3_0ifcb"]
 
@@ -57,18 +57,18 @@ animations = [{
 [sub_resource type="LabelSettings" id="LabelSettings_fjgg4"]
 font = ExtResource("3_0ifcb")
 
-[node name="Enemy" type="Node2D"]
+[node name="Enemy" type="Node2D" unique_id=1127169135]
 script = ExtResource("1_5bdg5")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1232826085]
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -2)
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=2028231672]
+position = Vector2(0, -9)
 sprite_frames = SubResource("SpriteFrames_uwg5a")
 autoplay = "default"
 frame_progress = 0.76405066
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="." unique_id=1670896085]
 offset_left = -12.0
 offset_top = -14.0
 offset_right = 28.0
