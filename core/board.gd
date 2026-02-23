@@ -9,7 +9,6 @@ class_name Board
 @onready var tile_map_board: TileMapLayer = $TileMapBoard
 @onready var tile_map_preview: TileMapLayer = $TileMapPreview
 
-#var cells : Dictionary[Vector2i,GridCell]
 var last_cell_under_mouse: Vector2i = Vector2i(0,0)
 var cell_data: Dictionary[Vector2i, CellData] = {}
 
@@ -30,7 +29,8 @@ func _unhandled_input(event: InputEvent) -> void:
 				last_cell_under_mouse = new_cell
 				hovered.emit(last_cell_under_mouse)
 				print(new_cell)
-
+		else:
+			clear_preview()
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouse and event.is_pressed():
@@ -39,37 +39,23 @@ func _input(event: InputEvent) -> void:
 			cell_clicked.emit(cell_click)
 
 func build_grid():
-	var cell_size = Vector2(16,16)
-	#board_sprite.texture.get_size()
-	#var origin = (cell_size * 2 / -2) + cell_size 
-	#origin += Vector2(0,3)
-	var half_grid = floor(grid_size / 2)
+	var half_grid = Vector2i(grid_size / 2.0)
 	for y in grid_size.y:
 		for x in grid_size.x:
 			var cell = CellData.new()
-			var position = Vector2i(
+			var position_cell = Vector2i(
 				x - half_grid.x,
 				y - half_grid.y
 			)
-			#cell.position = origin + Vector2(
-				#x * cell_size.x,
-				#y * cell_size.y
-			#)
-			#cell.clicked.connect(_on_cell_clicked)
-			#cell.hovered.connect(GameManager._on_cell_hovered)
-			#cell.unhovered.connect(GameManager._on_cell_unhovered)
-			#grid.add_child(cell)
-			#cells[cell.coord] = cell
-			cell_data[position] = cell
-			cell_data[position].conent = null
-			cell_data[position].coord_world = position
+			cell_data[position_cell] = cell
+			cell_data[position_cell].conent = null
+			cell_data[position_cell].coord_world = position
 
 func show_preview(hovered_cell:Vector2i, card: CardData):
 	clear_preview()
 	var result = check_cells(hovered_cell,card.shape_rotated)
 	for cell in result:
 		tile_map_preview.set_cell(cell,2,Vector2i.ZERO)
-		#cells[cell].preview(true)
 
 func get_cell() -> Vector2i:
 	var mouse_position = get_global_mouse_position()
@@ -79,7 +65,7 @@ func get_cell() -> Vector2i:
 
 func is_inside_grid(cell : Vector2i)->bool:
 	var result = false
-	var grid_size_parameter = floor(grid_size / 2)
+	var grid_size_parameter = Vector2i(grid_size / 2.0)
 	if cell.x >= -grid_size_parameter.x and cell.y >= -grid_size_parameter.y:
 		if cell.x <= grid_size_parameter.x and cell.y <= grid_size_parameter.y :
 			result = true
@@ -87,11 +73,6 @@ func is_inside_grid(cell : Vector2i)->bool:
 
 func clear_preview():
 	tile_map_preview.clear()
-	#for cell in cells:
-		#cells[cell].preview(false)
-
-func _on_cell_clicked(coord: Vector2i):
-	GameManager.on_cell_clicked(coord)
 
 func add_enemy(coord: Vector2i, enemy: Node2D):
 	var current_cell = cell_data[coord]

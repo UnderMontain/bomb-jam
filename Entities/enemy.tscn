@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bn4yfwn686x1i"]
 
 [ext_resource type="Script" uid="uid://dsb013abu1m5o" path="res://Entities/enemy.gd" id="1_5bdg5"]
-[ext_resource type="Texture2D" uid="uid://lmlij1i02nx" path="res://Calavera.png" id="2_5bdg5"]
-[ext_resource type="FontFile" uid="uid://cl83uo0avcov3" path="res://PeaberryBase.ttf" id="3_0ifcb"]
+[ext_resource type="Texture2D" uid="uid://lmlij1i02nx" path="res://Entities/Calavera.png" id="2_5bdg5"]
+[ext_resource type="FontFile" uid="uid://cl83uo0avcov3" path="res://Fonts/PeaberryBase.ttf" id="3_0ifcb"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0ifcb"]
 atlas = ExtResource("2_5bdg5")

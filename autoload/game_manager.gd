@@ -13,14 +13,12 @@ var current_main : Main
 var current_board : Board
 var deck: Deck
 var hand: Hand
-var card: Card
 var player: Player
 var round_cost = 0
 var cost_max = 5
 var init_cost_max = 5
 const ENEMY = preload("uid://bn4yfwn686x1i")
 const MAIN = preload("uid://crfdvfd3ero57")
-@onready var cost_2: Label = $Control/Cost2
 
 var has_hovered_cell: bool
 var last_coord_cell: Vector2i
@@ -44,7 +42,6 @@ func _Play():
 	hand._pick_card(deck)
 	hand._pick_card(deck)
 	hand._pick_card(deck)
-	#card.show_preview(hand.current_card)
 	state = GameState.AIMING
 
 func _add_enemy():
@@ -91,8 +88,6 @@ func _on_cell_clicked (coord: Vector2i):
 				return
 			round_cost = 0
 			cost_changed.emit(round_cost,cost_max)
-			
-			
 			next_wave()
 		else:
 			var enemis = current_board.get_enemies()
@@ -113,10 +108,10 @@ func next_wave():
 	var is_update = deck.find_card_to_upgrade()
 	current_main.card_update(is_update)
 
-	var lifeenemy = enemy_hp_base + int(wave/15)
+	var lifeenemy: int = enemy_hp_base + int(wave/15.0)
 	var cells_empty = current_board.get_cell_empty()
 	cells_empty.shuffle()
-	var enemies_to_spawn := int(1 + wave / 5)
+	var enemies_to_spawn: int = 1 + floori(wave / 5.0)
 	for i in enemies_to_spawn:
 		if cells_empty.is_empty(): return
 		var random_cell = cells_empty.pop_front()
@@ -130,11 +125,6 @@ func game_over():
 	round_cost = 0
 	deck.reset()
 	cost_max = init_cost_max
-	#next_wave()
-	#_Play()
 	
 	await create_tween().tween_interval(1.3).finished
 	SceneManager.change_to("res://core/main_menu.tscn")
-	#get_tree().change_scene_to_file("res://core/main.tscn")
-	
-	#_Play()

@@ -4,9 +4,7 @@ class_name Main
 @onready var board: Board = $Board
 @onready var deck: Deck = $Deck
 @onready var hand: Hand = $Hand
-@export var player:Player
-
-#@onready var card: Card = $Card
+@export var player: Player
 
 @export var GUI: UIManager
 @onready var hand_ui: Control = $CanvasLayer/GUI/HandUI
@@ -23,14 +21,12 @@ func _ready() -> void:
 	GameManager.current_board = board
 	board.hovered.connect(GameManager._on_cell_hovered)
 	board.cell_clicked.connect(GameManager._on_cell_clicked)
-	#GameManager.card = card
-	#GameManager._add_enemy()
 	hand.card_drawed.connect(add_card)
 	GameManager.wave_changed.connect(GUI.update_wave)
 	GameManager.cost_changed.connect(GUI.update_cost)
 	player.player_life_changed.connect(GUI.update_life)
 	GameManager._start()
-	
+
 func scene_load():
 	pass
 
@@ -50,26 +46,3 @@ func add_card(card: CardData):
 	cardUI.card_clicked.connect(GUI.selected_card)
 	GUI.add_card(cardUI)
 	cardUI._set_data(card)
-
-#func update_layout():
-	#var count := cards.size()
-	#if count == 0:
-		#return
-#
-	#var spacing := 40.0
-	#var max_angle := deg_to_rad(5)
-#
-	#var mid := (count - 1) / 2.0
-#
-	#for i in range(count):
-		#var card := cards[i] as Control
-		#var idx := i - mid
-#
-		#var t := 0.0 if mid == 0 else idx / mid
-		#var angle := t * max_angle
-#
-		#card.rotation = angle
-		#card.position = Vector2i(
-			#idx * spacing,
-			#abs(idx) * 6.0
-		#)

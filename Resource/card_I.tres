@@ -1,6 +1,6 @@
-[gd_resource type="Resource" script_class="CardData" load_steps=2 format=3 uid="uid://tlh1ak8cdgra"]
+[gd_resource type="Resource" script_class="CardData" format=3 uid="uid://tlh1ak8cdgra"]
 
-[ext_resource type="Script" uid="uid://btu57gnn5jlyv" path="res://Resource/card_data.gd" id="1_l5s3g"]
+[ext_resource type="Script" uid="uid://p7lu0ibbbg0s" path="res://Resource/card_data.gd" id="1_l5s3g"]
 
 [resource]
 script = ExtResource("1_l5s3g")
@@ -8,4 +8,3 @@ name = "Card I"
 shape = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, -1), Vector2i(1, 1)])
 damage = 1
 cost = 5
-metadata/_custom_type_script = "uid://btu57gnn5jlyv"

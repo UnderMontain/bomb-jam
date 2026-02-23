@@ -14,15 +14,16 @@ var cards : Array[CardUi]
 @onready var game_over_label: Label = $GameOver
 @onready var update_card: Label = $UpdateCard
 var tween: Tween
-func update_life(life:int):
-	self.life.text = "Life" + str(life)
 
-func update_cost(cost:int, max_cost:int):
-	cost = clamp(cost,0,max_cost)
-	self.cost.text = "Cost" + str(cost) + "/" + str(max_cost)
+func update_life(life_value:int):
+	self.life.text = "Life" + str(life_value)
+
+func update_cost(cost_value:int, max_cost:int):
+	cost_value = clamp(cost_value,0,max_cost)
+	self.cost.text = "Cost" + str(cost_value) + "/" + str(max_cost)
 	pass#
-func update_wave(wave:int):
-	self.wave.text = "Wave " + str(wave)
+func update_wave(_wave:int):
+	self.wave.text = "Wave " + str(_wave)
 	pass
 
 func game_over():
@@ -45,13 +46,14 @@ func selected_card(card_ui: CardUi):
 	card_ui.animate_to(
 		Vector2(0,0),
 		0.0,
+		MouseFilter.MOUSE_FILTER_IGNORE,
 		MouseFilter.MOUSE_FILTER_IGNORE
 	)
 
 
 func add_card(card_ui: CardUi):
 	hand_ui.add_child(card_ui)
-
+	
 	# empieza fuera de pantalla
 	card_ui.global_position = Vector2(700, 200)
 
@@ -69,46 +71,16 @@ func update_layout():
 	var mid := (count - 1) / 2.0
 
 	for i in range(count):
-		var card := cards[i]
+		var card : CardUi= cards[i]
 		var idx := i - mid
-
+		
 		var t := 0.0 if mid == 0 else idx / mid
 		var angle := t * max_angle
 
 		var rotated = angle
-		var target_position = Vector2i(
+		var target_position = Vector2(
 			idx * spacing,
 			abs(idx) * 6.0
 		)
-		card.animate_to(target_position,rotated,MouseFilter.MOUSE_FILTER_PASS)
-
-#func add_card(card: CardData):
-	#var cardUI = CARD_UI.instantiate() as CardUi
-	#cardUI.card_clicked.connect(hand.set_card_seleted)
-	#hand_ui.add_child(cardUI)
-	#cards.append(cardUI)
-	#cardUI._set_data(card)
-	#update_layout()
-#
-#func update_layout():
-	#var count := cards.size()
-	#if count == 0:
-		#return
-#
-	#var spacing := 40.0
-	#var max_angle := deg_to_rad(10)
-#
-	#var mid := (count - 1) / 2.0
-#
-	#for i in range(count):
-		#var card := cards[i] as Control
-		#var idx := i - mid
-#
-		#var t := 0.0 if mid == 0 else idx / mid
-		#var angle := t * max_angle
-#
-		#card.rotation = angle
-		#card.position = Vector2(
-			#idx * spacing,
-			#abs(idx) * 6.0
-		#)
+		card.set_parameter(target_position,rotated)
+		card.animate_to(target_position,rotated,MouseFilter.MOUSE_FILTER_IGNORE,MouseFilter.MOUSE_FILTER_PASS)

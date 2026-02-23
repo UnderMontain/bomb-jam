@@ -22,7 +22,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 GameManager="*res://autoload/game_manager.gd"
-Audio="*res://Audio.tscn"
+Audio="*res://autoload/Audio.tscn"
 SceneManager="*res://autoload/scene_manager.gd"
 
 [debug]

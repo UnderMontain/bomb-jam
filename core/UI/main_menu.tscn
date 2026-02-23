@@ -1,8 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://don5ojf2cew3p"]
+[gd_scene format=3 uid="uid://don5ojf2cew3p"]
 
-[ext_resource type="Script" uid="uid://bkvy6hvwbo8di" path="res://core/main_menu.gd" id="1_540h8"]
+[ext_resource type="Script" uid="uid://bv5yunhgg2asb" path="res://core/UI/main_menu.gd" id="1_540h8"]
 [ext_resource type="Texture2D" uid="uid://o5dix115re7a" path="res://Resource/Fondo.png" id="2_sgkfw"]
-[ext_resource type="Texture2D" uid="uid://d4flenj3cqa0j" path="res://Sprite/logo2-Sheet.png" id="4_sgkfw"]
+[ext_resource type="Texture2D" uid="uid://d4flenj3cqa0j" path="res://Sprite/logo_menu.png" id="4_sgkfw"]
 [ext_resource type="PackedScene" uid="uid://bb6dj1mrey7yk" path="res://Utilitys/button_animated.tscn" id="7_opyrh"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sgkfw"]
@@ -181,13 +181,13 @@ animations = [{
 "speed": 12.0
 }]
 
+[sub_resource type="Animation" id="Animation_opyrh"]
+length = 0.001
+
 [sub_resource type="Animation" id="Animation_i3ow4"]
 resource_name = "press_button"
 length = 0.30003002
 step = 0.3
-
-[sub_resource type="Animation" id="Animation_opyrh"]
-length = 0.001
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_f2w0s"]
 _data = {
@@ -195,11 +195,12 @@ _data = {
 &"press_button": SubResource("Animation_i3ow4")
 }
 
-[node name="MainMenu" type="CanvasLayer" node_paths=PackedStringArray("start")]
+[node name="MainMenu" type="CanvasLayer" unique_id=206228026 node_paths=PackedStringArray("start", "exit")]
 script = ExtResource("1_540h8")
 start = NodePath("Control/VBoxContainer/Start")
+exit = NodePath("Control/VBoxContainer/Exit")
 
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." unique_id=1073218661]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -207,7 +208,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=1832116461]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -216,7 +217,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_sgkfw")
 
-[node name="Icon" type="Control" parent="Control"]
+[node name="Icon" type="Control" parent="Control" unique_id=1346032562]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -225,13 +226,13 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/Icon"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/Icon" unique_id=182121638]
 position = Vector2(133, 179)
 sprite_frames = SubResource("SpriteFrames_u1oa1")
 autoplay = "default"
 frame_progress = 0.56760836
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Control" unique_id=2142582575]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -247,12 +248,11 @@ grow_vertical = 2
 theme_override_constants/separation = -79
 alignment = 1
 
-[node name="Start" parent="Control/VBoxContainer" instance=ExtResource("7_opyrh")]
+[node name="Start" parent="Control/VBoxContainer" unique_id=794320632 instance=ExtResource("7_opyrh")]
 custom_minimum_size = Vector2(60, 180)
 layout_mode = 2
-stretch_mode = 5
 
-[node name="Label" type="Label" parent="Control/VBoxContainer/Start"]
+[node name="Label" type="Label" parent="Control/VBoxContainer/Start" unique_id=218076776]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -267,14 +267,9 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "Start"
 
-[node name="ButtonAnimated" parent="Control/VBoxContainer" instance=ExtResource("7_opyrh")]
+[node name="Exit" parent="Control/VBoxContainer" unique_id=2122540340 instance=ExtResource("7_opyrh")]
 custom_minimum_size = Vector2(100, 150)
 layout_mode = 2
-stretch_mode = 5
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="Control"]
-libraries = {
-&"": SubResource("AnimationLibrary_f2w0s")
-}
-
-[connection signal="button_down" from="Control/VBoxContainer/Start" to="." method="_on_start_button_down"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Control" unique_id=96236886]
+libraries/ = SubResource("AnimationLibrary_f2w0s")

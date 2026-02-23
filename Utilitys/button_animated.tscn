@@ -1,8 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bb6dj1mrey7yk"]
+[gd_scene format=3 uid="uid://bb6dj1mrey7yk"]
 
-[ext_resource type="Texture2D" uid="uid://ccmk11s11yti6" path="res://Sprite/click-Sheet.png" id="1_1pksb"]
-[ext_resource type="Texture2D" uid="uid://brk0ohycsde8l" path="res://Sprite/cursor-Sheet.png" id="2_6ug8r"]
-[ext_resource type="Script" uid="uid://i7b54lctv6sf" path="res://core/texture_button.gd" id="3_6ug8r"]
+[ext_resource type="Texture2D" uid="uid://ccmk11s11yti6" path="res://Sprite/click_button_menu.png" id="1_1pksb"]
+[ext_resource type="Texture2D" uid="uid://lx0ar00wpgox" path="res://Sprite/cursor_hover_menu.png" id="2_6ug8r"]
+[ext_resource type="Script" uid="uid://bian7vbaxjkgc" path="res://Utilitys/texture_button.gd" id="3_6ug8r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8s36p"]
 atlas = ExtResource("1_1pksb")
