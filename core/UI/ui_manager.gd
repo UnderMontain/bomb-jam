@@ -21,7 +21,8 @@ func update_life(life_value:int):
 func update_cost(cost_value:int, max_cost:int):
 	cost_value = clamp(cost_value,0,max_cost)
 	self.cost.text = "Cost" + str(cost_value) + "/" + str(max_cost)
-	pass#
+	pass
+
 func update_wave(_wave:int):
 	self.wave.text = "Wave " + str(_wave)
 	pass
@@ -30,7 +31,6 @@ func game_over():
 	game_over_label.visible = true
 
 func selected_card(card_ui: CardUi):
-
 	# Si hay una seleccionada, devolverla
 	if current_card and current_card != card_ui:
 		cards.append(current_card)
@@ -50,6 +50,9 @@ func selected_card(card_ui: CardUi):
 		MouseFilter.MOUSE_FILTER_IGNORE
 	)
 
+func discard_card(card:CardInstance):
+	if card == current_card.card_instance:
+		current_card.queue_free()
 
 func add_card(card_ui: CardUi):
 	hand_ui.add_child(card_ui)

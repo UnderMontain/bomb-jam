@@ -1,32 +1,34 @@
 extends Node
 class_name Deck
 
-@export var cards: Array[CardData] = []
 
-var draw_pile: Array[CardData] = []
-var discard_pile: Array[CardData] = []
+var draw_pile: Array[CardInstance] = []
+var discard_pile: Array[CardInstance] = []
 
-func reset() -> void:
+
+func create_deck(cards: Array[CardData]):
 	draw_pile.clear()
 	discard_pile.clear()
-	for i in 10:
-		var card = cards[0].duplicate(true)
-		draw_pile.append(card)
-	draw_pile.shuffle()
+	for card in cards:
+		var new_card = CardInstance.new(card)
+		draw_pile.append(new_card)
+
+##TODO Corregir retorno de draw si no hay mas cartas ni en la pila ni en el descarte
+func draw() -> CardInstance:
+	if draw_pile.is_empty(): shuffle()
+	var card = draw_pile.pop_front() 
+	return card
 
 func shuffle():
-	draw_pile = discard_pile.duplicate()
+	draw_pile.append_array(discard_pile)
 	discard_pile.clear()
 	draw_pile.shuffle()
 
-func draw() -> CardData:
-	if draw_pile.is_empty(): shuffle()
-	var card = draw_pile.pop_front() 
+func discard(card: CardInstance):
 	discard_pile.append(card)
-	return card
 
 func find_card_to_upgrade()-> bool:
-	var all_cards := []
+	var all_cards: Array[CardInstance]
 	all_cards = draw_pile + discard_pile
 	all_cards.shuffle()
 	for card in all_cards:
@@ -35,9 +37,9 @@ func find_card_to_upgrade()-> bool:
 	return false
 	
 
-
-func upgrade_card(card:CardData) -> bool:
-	
+##TODO Corregir Update Card Instance
+func upgrade_card(card_instance:CardInstance) -> bool:
+	var card = card_instance.card_data
 	var upgrades:= []
 	
 	if card.cost > 0:

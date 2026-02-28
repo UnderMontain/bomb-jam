@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://don5ojf2cew3p"]
 
 [ext_resource type="Script" uid="uid://bv5yunhgg2asb" path="res://core/UI/main_menu.gd" id="1_540h8"]
-[ext_resource type="Texture2D" uid="uid://o5dix115re7a" path="res://Resource/Fondo.png" id="2_sgkfw"]
+[ext_resource type="Texture2D" uid="uid://o5dix115re7a" path="res://Sprite/Fondo.png" id="2_sgkfw"]
 [ext_resource type="Texture2D" uid="uid://d4flenj3cqa0j" path="res://Sprite/logo_menu.png" id="4_sgkfw"]
 [ext_resource type="PackedScene" uid="uid://bb6dj1mrey7yk" path="res://Utilitys/button_animated.tscn" id="7_opyrh"]
 

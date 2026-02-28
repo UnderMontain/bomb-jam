@@ -1,6 +1,8 @@
 [gd_resource type="Resource" script_class="CardData" format=3 uid="uid://tlh1ak8cdgra"]
 
+[ext_resource type="Script" uid="uid://dr7nvfmxdxhd1" path="res://core/combat/actions/action_definition.gd" id="1_bdele"]
 [ext_resource type="Script" uid="uid://p7lu0ibbbg0s" path="res://Resource/card_data.gd" id="1_l5s3g"]
+[ext_resource type="Resource" uid="uid://ccpje7uaqpkje" path="res://Resource/cards/deal_damage_3.tres" id="2_417gp"]
 
 [resource]
 script = ExtResource("1_l5s3g")
@@ -8,3 +10,4 @@ name = "Card I"
 shape = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, -1), Vector2i(1, 1)])
 damage = 1
 cost = 5
+action = Array[ExtResource("1_bdele")]([ExtResource("2_417gp")])

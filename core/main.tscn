@@ -5,10 +5,7 @@
 [ext_resource type="Script" uid="uid://chwfdj4l0c3nu" path="res://core/UI/ui_manager.gd" id="2_ge7io"]
 [ext_resource type="Texture2D" uid="uid://c85k6cbom54a5" path="res://Sprite/background.png" id="2_jsmgm"]
 [ext_resource type="PackedScene" uid="uid://c44cllj2gd2lo" path="res://core/deck.tscn" id="4_xa854"]
-[ext_resource type="Script" uid="uid://p7lu0ibbbg0s" path="res://Resource/card_data.gd" id="5_cus2n"]
 [ext_resource type="PackedScene" uid="uid://dbjbcuwcbbtr8" path="res://core/hand.tscn" id="5_kagtj"]
-[ext_resource type="Resource" uid="uid://0aay4u2rwvdl" path="res://Resource/card_L.tres" id="6_brq4u"]
-[ext_resource type="Resource" uid="uid://tlh1ak8cdgra" path="res://Resource/card_I.tres" id="8_rayt5"]
 [ext_resource type="Script" uid="uid://yse84ek06upa" path="res://Entities/player.gd" id="13_7ua4h"]
 [ext_resource type="FontFile" uid="uid://cl83uo0avcov3" path="res://Fonts/PeaberryBase.ttf" id="14_ntwa4"]
 
@@ -16,70 +13,6 @@
 font = ExtResource("14_ntwa4")
 font_color = Color(0.47843137, 0.7019608, 0.25490198, 1)
 outline_size = 4
-
-[sub_resource type="GDScript" id="GDScript_rayt5"]
-script/source = "extends Area2D
-class_name GridCell
-
-var coord: Vector2i
-
-@onready var sprite_2d: Sprite2D = $Sprite2D
-var color_sprite
-signal clicked(coord)
-
-signal hovered(coord: Vector2i)
-signal unhovered(coord: Vector2i)
-
-func _ready() -> void:
-	sprite_2d.modulate = Color(1, 1, 1, 0)
-	color_sprite = sprite_2d.texture
-	
-func _on_pressed() -> void:
-	clicked.emit(coord)
-
-func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouse and event.is_pressed():
-		clicked.emit(coord)
-
-func preview(condition: bool):
-	if condition:
-		sprite_2d.modulate = Color(1, 1, 1, 0.2)
-	else:
-		sprite_2d.modulate = Color(1, 1, 1, 0)
-
-func _on_mouse_entered() -> void:
-	hovered.emit(coord)
-
-func _on_mouse_exited() -> void:
-	unhovered.emit(coord)
-"
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2yhut"]
-size = Vector2(14, 14)
-
-[sub_resource type="Gradient" id="Gradient_15evq"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_2migw"]
-gradient = SubResource("Gradient_15evq")
-width = 14
-height = 14
-fill_from = Vector2(0.5597484, 0.4937107)
-
-[sub_resource type="PackedScene" id="PackedScene_510js"]
-_bundled = {
-"conn_count": 2,
-"conns": PackedInt32Array(1073741827, 1073741826, 10, 9, 2, 0, 0, 1073741829, 1073741828, 12, 11, 2, 0, 0),
-"editable_instances": [],
-"id_paths": [PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array(), PackedInt32Array()],
-"names": PackedStringArray("Cell", "Area2D", "script", "CollisionShape2D", "CollisionShape2D", "shape", "Sprite2D", "Sprite2D", "texture", "_on_mouse_entered", "mouse_entered", "_on_mouse_exited", "mouse_exited"),
-"node_count": 3,
-"node_ids": PackedInt32Array(493728397, 2024800960, 1782049023),
-"node_paths": [NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath("."), NodePath(".")],
-"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 1, 2, 0, 0, 1073741824, 0, 4, 3, -1, 1, 5, 1, 0, 1073741825, 0, 7, 6, -1, 1, 8, 2, 0),
-"variants": [SubResource("GDScript_rayt5"), SubResource("RectangleShape2D_2yhut"), SubResource("GradientTexture2D_2migw")],
-"version": 3
-}
 
 [node name="Main" type="Node2D" unique_id=1782264961 node_paths=PackedStringArray("player", "GUI")]
 script = ExtResource("1_3gdo0")
@@ -172,10 +105,8 @@ process_callback = 0
 
 [node name="Board" parent="." unique_id=2034127296 instance=ExtResource("1_xiose")]
 position = Vector2(-51, 2)
-cell_scene = SubResource("PackedScene_510js")
 
 [node name="Deck" parent="." unique_id=2145467262 instance=ExtResource("4_xa854")]
-cards = Array[ExtResource("5_cus2n")]([ExtResource("6_brq4u"), ExtResource("8_rayt5")])
 
 [node name="Hand" parent="." unique_id=28306825 instance=ExtResource("5_kagtj")]
 

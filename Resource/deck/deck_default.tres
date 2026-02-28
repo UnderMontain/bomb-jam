@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="DeckDefinition" format=3 uid="uid://do4mp2duh8ga5"]
+
+[ext_resource type="Script" uid="uid://p7lu0ibbbg0s" path="res://Resource/card_data.gd" id="1_f67tc"]
+[ext_resource type="Script" uid="uid://bcwvg2obukbjm" path="res://core/combat/deck_definition.gd" id="1_oaurx"]
+[ext_resource type="Resource" uid="uid://tlh1ak8cdgra" path="res://Resource/card_I.tres" id="2_0kwq0"]
+[ext_resource type="Resource" uid="uid://0aay4u2rwvdl" path="res://Resource/card_L.tres" id="3_jg85w"]
+
+[resource]
+script = ExtResource("1_oaurx")
+cards = Array[ExtResource("1_f67tc")]([ExtResource("2_0kwq0"), ExtResource("3_jg85w"), ExtResource("2_0kwq0"), ExtResource("3_jg85w")])
+metadata/_custom_type_script = "uid://bcwvg2obukbjm"

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="DealDamageActionDefinition" format=3 uid="uid://ccpje7uaqpkje"]
+
+[ext_resource type="Script" uid="uid://bo0cpvmgywvli" path="res://core/combat/actions/deal_damage_action_definition.gd" id="1_ack3n"]
+
+[resource]
+script = ExtResource("1_ack3n")
+metadata/_custom_type_script = "uid://bo0cpvmgywvli"

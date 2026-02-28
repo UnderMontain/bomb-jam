@@ -22,11 +22,13 @@ func _ready() -> void:
 	board.hovered.connect(GameManager._on_cell_hovered)
 	board.cell_clicked.connect(GameManager._on_cell_clicked)
 	hand.card_drawed.connect(add_card)
+	hand.card_use.connect(GUI.discard_card)
 	GameManager.wave_changed.connect(GUI.update_wave)
 	GameManager.cost_changed.connect(GUI.update_cost)
 	player.player_life_changed.connect(GUI.update_life)
 	GameManager._start()
-
+	
+	
 func scene_load():
 	pass
 
@@ -40,7 +42,7 @@ func card_update(is_posiblie:bool):
 	pass
 
 #UI
-func add_card(card: CardData):
+func add_card(card: CardInstance):
 	var cardUI = CARD_UI.instantiate() as CardUi
 	cardUI.card_clicked.connect(hand.set_card_seleted)
 	cardUI.card_clicked.connect(GUI.selected_card)

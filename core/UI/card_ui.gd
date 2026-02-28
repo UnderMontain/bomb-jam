@@ -2,6 +2,7 @@ extends Control
 class_name CardUi
 
 signal card_clicked(CardUi)
+
 @onready var cost: Label = $Cost
 @onready var damage: Label = $Damage
 @onready var grid_container: GridContainer = $GridContainer
@@ -13,7 +14,7 @@ var dragging: bool
 var drag_offset: Vector2
 var rotated_preview: float
 var position_preview: Vector2
-var card_data: CardData
+var card_instance: CardInstance
 
 func set_parameter(pos:Vector2, rotated: float):
 	position_preview = pos
@@ -39,12 +40,12 @@ func _gui_input(event):
 			texture_rect.mouse_filter = Control.MOUSE_FILTER_IGNORE
 			card_clicked.emit(self)
 
-func _set_data(card: CardData):
-	for cell in card.shape:
+func _set_data(card: CardInstance):
+	for cell in card.card_data.shape:
 		cells[cell+Vector2i(1,1)].modulate = Color.WHITE
-	card_data = card
-	cost.text = str(card.cost)
-	damage.text = str(card.damage)
+	card_instance = card
+	cost.text = str(card.card_data.cost)
+	damage.text = str(card.card_data.damage)
 
 func _on_texture_rect_mouse_entered() -> void:
 	animate_to(position_preview + Vector2(0, -50), 0,MouseFilter.MOUSE_FILTER_PASS,MouseFilter.MOUSE_FILTER_PASS)

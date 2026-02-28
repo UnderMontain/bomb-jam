@@ -9,6 +9,9 @@ enum GameState{
 }
 var state: GameState
 
+var action_queue: Array[Action] = []
+var global_modifires: Array[Modifier] = []
+
 var current_main : Main
 var current_board : Board
 var deck: Deck
@@ -19,6 +22,9 @@ var cost_max = 5
 var init_cost_max = 5
 const ENEMY = preload("uid://bn4yfwn686x1i")
 const MAIN = preload("uid://crfdvfd3ero57")
+const DECK_DEFAULT = preload("uid://do4mp2duh8ga5")
+
+
 
 var has_hovered_cell: bool
 var last_coord_cell: Vector2i
@@ -33,22 +39,50 @@ func _ready() -> void:
 	state = GameState.IDLE
 
 func _start():
-	deck.reset()
+	var cards: Array[CardData] = DECK_DEFAULT.cards as Array[CardData]
+	deck.create_deck(cards)
 	next_wave()
+	for i in 2:
+		var card:CardInstance = deck.draw()
+		hand._pick_card(card)
+		i += 1
 	_Play()
 
 func _Play():
 	state = GameState.DRAWING_CARD
-	hand._pick_card(deck)
-	hand._pick_card(deck)
-	hand._pick_card(deck)
+	var card:CardInstance = deck.draw()
+	hand._pick_card(card)
 	state = GameState.AIMING
 
-func _add_enemy():
-	var enemy = ENEMY.instantiate()
-	current_board.add_enemy(Vector2i(2,2),enemy)
-	var other = ENEMY.instantiate()
-	current_board.add_enemy(Vector2i(2,1),other)
+func _use_card(source,target:Array[CellData], card:CardInstance):
+	card.Play(source,target,self)
+	process_enqueue()
+
+#region Actions and Reactions
+func enqueue_action(action: Action) -> void:
+	action_queue.append(action)
+
+func process_enqueue():
+	while action_queue.size() > 0:
+		var action = action_queue.pop_front()
+		for mod in get_all_modifiers():
+			mod.modify_action(action)
+		
+		action.execute(self)
+
+func emit_event(event_type:StringName, data:Dictionary):
+	for mod in get_all_modifiers():
+		var reation:Action = mod.on_event(event_type,data)
+		
+		if reation != null:
+			enqueue_action(reation)
+
+func get_all_modifiers() -> Array[Modifier]:
+	var all_mods: Array = [Modifier]
+	for mod in global_modifires:
+		all_mods.append(mod)
+	return all_mods
+#endregion
 
 
 func _input(event: InputEvent) -> void:
@@ -60,7 +94,6 @@ func _input(event: InputEvent) -> void:
 					current_board.show_preview(last_coord_cell, hand.current_card)
 
 func _on_cell_hovered(coord: Vector2i):
-	
 	has_hovered_cell = true
 	last_coord_cell = coord
 	current_board.show_preview(coord,hand.current_card)
@@ -73,12 +106,17 @@ func _on_cell_unhovered(coord: Vector2i):
 
 func _on_cell_clicked (coord: Vector2i):
 	if state == GameState.AIMING:
-		print_debug(coord)
 		state = GameState.RESOLVING_CARD
 		current_board.clear_preview()
-		round_cost += hand.current_card.cost
+		var card_used = hand.get_selected_card()
+		var matching_cells = current_board.check_cells(coord,card_used.card_data.shape)
+		var cells = current_board.get_cell_data(matching_cells)
+		_use_card(player,cells,card_used)
+		deck.discard(card_used)
+		hand.use_card()
+		round_cost += card_used.card_data.cost
 		cost_changed.emit(round_cost,cost_max)
-		await current_board.aplay_card(coord,hand.current_card)
+		await current_board.apply_card(coord,card_used)
 		if round_cost >= cost_max:
 			var enemies = current_board.get_enemies()
 			for enemie in enemies:
@@ -123,7 +161,6 @@ func game_over():
 	current_main.game_over()
 	wave = 0
 	round_cost = 0
-	deck.reset()
 	cost_max = init_cost_max
 	
 	await create_tween().tween_interval(1.3).finished

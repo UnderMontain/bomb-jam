@@ -6,3 +6,5 @@ class_name CardData
 var shape_rotated: Array[Vector2i]
 @export var damage: int
 @export var cost: int
+
+@export var actions: Array[ActionDefinition]
