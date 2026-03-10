@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://bh21r7036d7r4"]
+
+[ext_resource type="Script" uid="uid://d3id73ftqafrh" path="res://Entities/EntityView/enemy_view.gd" id="1_u060l"]
+
+[node name="EnemyView" type="Node2D" unique_id=542000125]
+script = ExtResource("1_u060l")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=725982013]
+position = Vector2(0, -12)
+autoplay = "default"

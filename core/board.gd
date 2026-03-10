@@ -18,7 +18,7 @@ const EXPLOTION = preload("uid://cnngjbksnqusx")
 
 func _ready() -> void:
 	build_grid()
-	VisualBus.cells_effect.connect(_on_animated_cells)
+	VisualBus.cell_effect.connect(_on_animated_cells)
 	pass
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -28,7 +28,6 @@ func _unhandled_input(event: InputEvent) -> void:
 			if new_cell != last_cell_under_mouse:
 				last_cell_under_mouse = new_cell
 				hovered.emit(last_cell_under_mouse)
-				print(new_cell)
 		else:
 			clear_preview()
 
@@ -48,8 +47,8 @@ func build_grid():
 				y - half_grid.y
 			)
 			cell_data[position_cell] = cell
-			cell_data[position_cell].conent = null
-			cell_data[position_cell].coord_world = position
+			cell_data[position_cell].content = null
+			cell_data[position_cell].cell_coord = position_cell
 
 func show_preview(hovered_cell:Vector2i, card: CardInstance):
 	if card == null:
@@ -57,7 +56,7 @@ func show_preview(hovered_cell:Vector2i, card: CardInstance):
 	clear_preview()
 	var result = check_cells(hovered_cell,card.card_data.shape_rotated)
 	for cell in result:
-		tile_map_preview.set_cell(cell,0,Vector2i.ZERO)
+		tile_map_preview.set_cell(cell,2,Vector2i.ZERO)
 
 func get_cell() -> Vector2i:
 	var mouse_position = get_global_mouse_position()
@@ -76,43 +75,56 @@ func is_inside_grid(cell : Vector2i)->bool:
 func clear_preview():
 	tile_map_preview.clear()
 
-func add_enemy(coord: Vector2i, enemy: Node2D):
+func add_enemy(coord: Vector2i, enemy: EnemyState):
 	var current_cell = cell_data[coord]
-	
-	if current_cell.conent == null:
-		current_cell.conent = enemy
-		enemy.global_position = tile_map_board.map_to_local(coord) 
-		add_child(enemy)
 
+	if current_cell.content == null:
+		current_cell.content = enemy
+
+func place_entity(state: EnemyState, coord: Vector2i) -> void:
+	var cell = cell_data.get(coord, null)
+	if cell and cell.content == null:
+		cell.content = state
+
+func deleate_entity(_entity:EntityState):
+	for cell in cell_data:
+		if cell_data[cell].content == _entity:
+			cell_data[cell].content = null
+			return
 ##TODO Refactorizar animaciones
-func apply_card(origin:Vector2i, card:CardInstance): 
-	var cells_aplay = check_cells(origin, card.card_data.shape_rotated)
-	print_debug(cells_aplay)
-	for cell in cells_aplay:
-		var explotion = EXPLOTION.instantiate() as AnimatedSprite2D
-		explotion.global_position = tile_map_board.map_to_local(cell)
-		add_child(explotion)
-		explotion.get_node("GPUParticles2D").restart()
-		explotion.animation_finished.connect(explotion.queue_free)
-	for cell in cells_aplay:
-		if cell_data[cell].conent != null:
-			cell_data[cell].conent.died.connect(on_enemy_die)
-			await cell_data[cell].conent.take_damage(cell,card.card_data.damage)
+#func apply_card(origin:Vector2i, card:CardInstance): 
+	#var cells_aplay = check_cells(origin, card.card_data.shape_rotated)
+	#for cell in cells_aplay:
+		#var explotion = EXPLOTION.instantiate() as AnimatedSprite2D
+		#explotion.global_position = tile_map_board.map_to_local(cell)
+		#add_child(explotion)
+		#explotion.get_node("GPUParticles2D").restart()
+		#explotion.animation_finished.connect(explotion.queue_free)
+	#for cell in cells_aplay:
+		#if cell_data[cell].content != null:
+			#cell_data[cell].content.died.connect(on_enemy_die)
+			#await cell_data[cell].content.take_damage(cell,card.card_data.damage)
  
+
+
 func on_enemy_die(cell_position : Vector2i):
-	cell_data[cell_position].conent = null
+	cell_data[cell_position].content = null
 
 func get_enemies()-> Array[Enemy]:
 	var result:Array[Enemy]
 	for cell in cell_data:
-		if cell_data[cell].conent != null:
-			result.append(cell_data[cell].conent)
+		if cell_data[cell].content != null:
+			result.append(cell_data[cell].content)
 	return result 
+
+func cell_to_world(coord:Vector2i) -> Vector2:
+	var position_world = tile_map_board.map_to_local(coord) 
+	return position_world 
 
 func get_cell_empty()-> Array[Vector2i]:
 	var result:Array[Vector2i]
 	for cell in cell_data:
-		if cell_data[cell].conent == null:
+		if cell_data[cell].content == null:
 			result.append(cell)
 	return result
 
@@ -125,7 +137,7 @@ func check_cells(origin: Vector2i, shape: Array[Vector2i]) -> Array[Vector2i]:
 	return results
 
 ##Devuelve las cell_data de todas las posiciones de la grilla que se pasen por referencia
-func get_cell_data(shape: Array[Vector2i]) -> Array[CellData]:
+func get_cells_data(shape: Array[Vector2i]) -> Array[CellData]:
 	var result: Array[CellData]
 	for coord in shape:
 		var cell: CellData = cell_data[coord]
@@ -133,13 +145,16 @@ func get_cell_data(shape: Array[Vector2i]) -> Array[CellData]:
 	return result
 		
 
+func get_cell_data_at(coord: Vector2i) -> CellData:
+	return cell_data.get(coord, null)
+
 #region AnimationsEventReaction
 
-func _on_animated_cells(sharp:Array[Vector2i]):
-	for cell in sharp:
-		var explotion = EXPLOTION.instantiate() as AnimatedSprite2D
-		explotion.global_position = tile_map_board.map_to_local(cell)
-		add_child(explotion)
-		explotion.get_node("GPUParticles2D").restart()
-		explotion.animation_finished.connect(explotion.queue_free)
+func _on_animated_cells(cell_target:CellData, effect_name):
+	#for cell in sharp:
+	var explotion = EXPLOTION.instantiate() as AnimatedSprite2D
+	explotion.global_position = tile_map_board.map_to_local(cell_target.cell_coord)
+	add_child(explotion)
+	explotion.get_node("GPUParticles2D").restart()
+	explotion.animation_finished.connect(explotion.queue_free)
 #endregion

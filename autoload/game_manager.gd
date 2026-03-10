@@ -23,6 +23,8 @@ var init_cost_max = 5
 const ENEMY = preload("uid://bn4yfwn686x1i")
 const MAIN = preload("uid://crfdvfd3ero57")
 const DECK_DEFAULT = preload("uid://do4mp2duh8ga5")
+const ENEMY_VIEW = preload("uid://bh21r7036d7r4")
+const ENEMY_BASE_DATA = preload("uid://dqn46nrpxfne")
 
 
 
@@ -70,6 +72,8 @@ func process_enqueue():
 		
 		action.execute(self)
 
+
+## Se Debe usar strignames definidos en la clase EventTypes
 func emit_event(event_type:StringName, data:Dictionary):
 	for mod in get_all_modifiers():
 		var reation:Action = mod.on_event(event_type,data)
@@ -78,7 +82,7 @@ func emit_event(event_type:StringName, data:Dictionary):
 			enqueue_action(reation)
 
 func get_all_modifiers() -> Array[Modifier]:
-	var all_mods: Array = [Modifier]
+	var all_mods: Array[Modifier]
 	for mod in global_modifires:
 		all_mods.append(mod)
 	return all_mods
@@ -110,13 +114,13 @@ func _on_cell_clicked (coord: Vector2i):
 		current_board.clear_preview()
 		var card_used = hand.get_selected_card()
 		var matching_cells = current_board.check_cells(coord,card_used.card_data.shape)
-		var cells = current_board.get_cell_data(matching_cells)
+		var cells = current_board.get_cells_data(matching_cells)
 		_use_card(player,cells,card_used)
 		deck.discard(card_used)
 		hand.use_card()
 		round_cost += card_used.card_data.cost
 		cost_changed.emit(round_cost,cost_max)
-		await current_board.apply_card(coord,card_used)
+		#await current_board.apply_card(coord,card_used)
 		if round_cost >= cost_max:
 			var enemies = current_board.get_enemies()
 			for enemie in enemies:
@@ -153,9 +157,14 @@ func next_wave():
 	for i in enemies_to_spawn:
 		if cells_empty.is_empty(): return
 		var random_cell = cells_empty.pop_front()
-		var enemy = ENEMY.instantiate() as Enemy
-		current_board.add_enemy(random_cell,enemy)
-		enemy.init_life(lifeenemy)
+		var position_world = current_board.cell_to_world(random_cell)
+		var enemy_state = EnemyState.new(ENEMY_BASE_DATA,random_cell)
+		current_board.place_entity(enemy_state,random_cell)
+		var enemy_view = ENEMY_VIEW.instantiate() as EnemyView
+		current_board.add_child(enemy_view)
+		enemy_view.position = position_world
+		enemy_view._setup(enemy_state)
+		#enemy_state.init_life(lifeenemy)
 
 func game_over():
 	current_main.game_over()

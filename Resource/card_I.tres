@@ -10,4 +10,4 @@ name = "Card I"
 shape = Array[Vector2i]([Vector2i(0, 0), Vector2i(0, -1), Vector2i(1, 1)])
 damage = 1
 cost = 5
-action = Array[ExtResource("1_bdele")]([ExtResource("2_417gp")])
+actions = Array[ExtResource("1_bdele")]([ExtResource("2_417gp")])

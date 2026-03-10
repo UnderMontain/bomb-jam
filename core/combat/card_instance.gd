@@ -12,5 +12,6 @@ func Play(souce, targets:Array[CellData], game_manager:GameManager) -> void:
 	for action in card_data.actions:
 		if action is DealDamageActionDefinition:
 				for target in targets:
-					if target.conent != null:
-						game_manager.enqueue_action(action.create_action(souce, target.conent)) 
+					game_manager.enqueue_action(action.create_action(souce, target)) 
+					
+					

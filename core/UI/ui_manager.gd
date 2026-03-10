@@ -58,7 +58,7 @@ func add_card(card_ui: CardUi):
 	hand_ui.add_child(card_ui)
 	
 	# empieza fuera de pantalla
-	card_ui.global_position = Vector2(700, 200)
+	card_ui.global_position = Vector2(1300,300)
 
 	cards.append(card_ui)
 	update_layout()
@@ -68,22 +68,25 @@ func update_layout():
 	if count == 0:
 		return
 
-	var spacing := 40.0
-	var max_angle := deg_to_rad(5)
-
-	var mid := (count - 1) / 2.0
+	var spacing_angle := deg_to_rad(8.0)
+	var radius        := 600.0
+	var mid           := (count - 1) / 2.0
 
 	for i in range(count):
-		var card : CardUi= cards[i]
-		var idx := i - mid
-		
-		var t := 0.0 if mid == 0 else idx / mid
-		var angle := t * max_angle
+		var card: CardUi = cards[i]
+		var idx   := i - mid
+		var t     := 0.0 if mid == 0 else idx / mid
+		var angle := t * (spacing_angle * mid)
 
-		var rotated = angle
-		var target_position = Vector2(
-			idx * spacing,
-			abs(idx) * 6.0
+		# Centro de la carta sobre el arco (relativo a HandUI)
+		var arc_pos := Vector2(
+			sin(angle) * radius,
+			-cos(angle) * radius + radius
 		)
-		card.set_parameter(target_position,rotated)
-		card.animate_to(target_position,rotated,MouseFilter.MOUSE_FILTER_IGNORE,MouseFilter.MOUSE_FILTER_PASS)
+
+		# ← Aqui esta la clave: corregir top-left → centro
+		var target_position := arc_pos - card.size / 2
+		card.set_parameter(target_position,angle)
+		card.animate_to(target_position, angle,
+			MouseFilter.MOUSE_FILTER_IGNORE,
+			MouseFilter.MOUSE_FILTER_PASS)

@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b6lnkaa2ddwm3" path="res://core/main.gd" id="1_3gdo0"]
 [ext_resource type="PackedScene" uid="uid://svgbetl60cqx" path="res://core/board.tscn" id="1_xiose"]
 [ext_resource type="Script" uid="uid://chwfdj4l0c3nu" path="res://core/UI/ui_manager.gd" id="2_ge7io"]
-[ext_resource type="Texture2D" uid="uid://c85k6cbom54a5" path="res://Sprite/background.png" id="2_jsmgm"]
 [ext_resource type="PackedScene" uid="uid://c44cllj2gd2lo" path="res://core/deck.tscn" id="4_xa854"]
 [ext_resource type="PackedScene" uid="uid://dbjbcuwcbbtr8" path="res://core/hand.tscn" id="5_kagtj"]
 [ext_resource type="Script" uid="uid://yse84ek06upa" path="res://Entities/player.gd" id="13_7ua4h"]
@@ -14,7 +13,26 @@ font = ExtResource("14_ntwa4")
 font_color = Color(0.47843137, 0.7019608, 0.25490198, 1)
 outline_size = 4
 
+[sub_resource type="Gradient" id="Gradient_cus2n"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0.13725491, 0.13333334, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_brq4u"]
+gradient = SubResource("Gradient_cus2n")
+width = 600
+height = 400
+
+[sub_resource type="Environment" id="Environment_brq4u"]
+background_mode = 3
+reflected_light_source = 1
+tonemap_mode = 3
+adjustment_enabled = true
+adjustment_brightness = 0.84
+adjustment_contrast = 0.95
+adjustment_saturation = 1.18
+
 [node name="Main" type="Node2D" unique_id=1782264961 node_paths=PackedStringArray("player", "GUI")]
+texture_filter = 1
 script = ExtResource("1_3gdo0")
 player = NodePath("Player")
 GUI = NodePath("CanvasLayer/GUI")
@@ -32,39 +50,38 @@ mouse_filter = 2
 script = ExtResource("2_ge7io")
 
 [node name="HandUI" type="Control" parent="CanvasLayer/GUI" unique_id=215368016]
-layout_mode = 1
 anchors_preset = 0
-offset_left = 455.0
-offset_top = 277.0
-offset_right = 505.0
-offset_bottom = 327.0
+offset_left = 640.0
+offset_top = 640.0
+offset_right = 640.0
+offset_bottom = 640.0
 mouse_filter = 1
 
 [node name="Life" type="Label" parent="CanvasLayer/GUI" unique_id=1206794456]
 layout_mode = 0
-offset_left = 187.5
-offset_top = 32.0
-offset_right = 239.5
-offset_bottom = 55.0
+offset_left = 466.0
+offset_top = 42.0
+offset_right = 518.0
+offset_bottom = 65.0
 text = "Life 3"
 label_settings = SubResource("LabelSettings_7ua4h")
 horizontal_alignment = 1
 
 [node name="Cost" type="Label" parent="CanvasLayer/GUI" unique_id=831097614]
 layout_mode = 0
-offset_left = 223.0
-offset_top = 8.0
-offset_right = 275.0
-offset_bottom = 31.0
+offset_left = 501.5
+offset_top = 18.0
+offset_right = 553.5
+offset_bottom = 41.0
 text = "cost 0"
 label_settings = SubResource("LabelSettings_7ua4h")
 
 [node name="Wave" type="Label" parent="CanvasLayer/GUI" unique_id=1688646617]
 layout_mode = 0
-offset_left = 249.5
-offset_top = 31.5
-offset_right = 314.5
-offset_bottom = 54.5
+offset_left = 528.0
+offset_top = 41.5
+offset_right = 593.0
+offset_bottom = 64.5
 text = "Wave 99"
 label_settings = SubResource("LabelSettings_7ua4h")
 
@@ -91,20 +108,20 @@ label_settings = SubResource("LabelSettings_7ua4h")
 
 [node name="PositionCard" type="Control" parent="CanvasLayer/GUI" unique_id=1608037674]
 anchors_preset = 0
-offset_left = 341.0
-offset_top = 96.0
-offset_right = 381.0
-offset_bottom = 136.0
+offset_left = 937.0
+offset_top = 323.0
+offset_right = 977.0
+offset_bottom = 363.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1097003032]
-texture = ExtResource("2_jsmgm")
+texture = SubResource("GradientTexture2D_brq4u")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1467866459]
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
 process_callback = 0
 
 [node name="Board" parent="." unique_id=2034127296 instance=ExtResource("1_xiose")]
-position = Vector2(-51, 2)
+position = Vector2(-8, -32)
 
 [node name="Deck" parent="." unique_id=2145467262 instance=ExtResource("4_xa854")]
 
@@ -112,3 +129,6 @@ position = Vector2(-51, 2)
 
 [node name="Player" type="Node" parent="." unique_id=184404170]
 script = ExtResource("13_7ua4h")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1471465854]
+environment = SubResource("Environment_brq4u")
