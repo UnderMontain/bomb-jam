@@ -110,8 +110,8 @@ func deleate_entity(_entity:EntityState):
 func on_enemy_die(cell_position : Vector2i):
 	cell_data[cell_position].content = null
 
-func get_enemies()-> Array[Enemy]:
-	var result:Array[Enemy]
+func get_enemies()-> Array[EnemyState]:
+	var result:Array[EnemyState]
 	for cell in cell_data:
 		if cell_data[cell].content != null:
 			result.append(cell_data[cell].content)

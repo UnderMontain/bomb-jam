@@ -19,8 +19,6 @@ func _setup(_enemy_state:EnemyState):
 #	label.text = str(life)
 
 
-
-
 func die_anim():
 	#life -= dmg
 ##	label.text = str(life)

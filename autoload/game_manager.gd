@@ -20,7 +20,6 @@ var player: Player
 var round_cost = 0
 var cost_max = 5
 var init_cost_max = 5
-const ENEMY = preload("uid://bn4yfwn686x1i")
 const MAIN = preload("uid://crfdvfd3ero57")
 const DECK_DEFAULT = preload("uid://do4mp2duh8ga5")
 const ENEMY_VIEW = preload("uid://bh21r7036d7r4")
