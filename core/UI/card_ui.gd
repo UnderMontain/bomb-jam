@@ -17,14 +17,8 @@ var rotated_preview: float
 var position_preview: Vector2
 var card_instance: CardInstance
 
-func set_parameter(pos:Vector2, rotated: float):
-	position_preview = pos
-	rotated_preview = rotated
-	pass
 
 func _ready() -> void:
-	pivot_offset = size / 2
-	
 	var gridsize = Vector2i(3,3)
 	var childs = grid_container.get_children()
 	var index = 0
@@ -33,6 +27,14 @@ func _ready() -> void:
 			childs[index].modulate = Color.TRANSPARENT
 			cells[Vector2i(x,y)] = childs[index]
 			index += 1
+
+func center_of_card(pos: Vector2) -> Vector2:
+	return pos - (size / 2)
+
+func set_parameter(pos:Vector2, rotated: float):
+	position_preview = pos
+	rotated_preview = rotated
+	pass
 
 func _gui_input(event):
 	if event is InputEventMouseButton:
@@ -50,7 +52,7 @@ func _set_data(card: CardInstance):
 func _on_texture_rect_mouse_entered() -> void:
 	original_index = get_index()          # guardar posición original
 	get_parent().move_child(self, -1)     # subir al frente
-	animate_to(position_preview + Vector2(0, -100), 0,
+	animate_to(position_preview + Vector2(0, -50), 0,
 		MouseFilter.MOUSE_FILTER_PASS,
 		MouseFilter.MOUSE_FILTER_PASS)
 
@@ -60,7 +62,9 @@ func _on_texture_rect_mouse_exited() -> void:
 		MouseFilter.MOUSE_FILTER_PASS,
 		MouseFilter.MOUSE_FILTER_PASS)
 
+
 func animate_to(target_pos: Vector2, target_rot: float, filter_mouse_init:MouseFilter, filter_mouse_finish: MouseFilter ):
+	target_pos = center_of_card(target_pos)
 	texture_rect.mouse_filter = filter_mouse_init
 	if tween:
 		tween.kill()
