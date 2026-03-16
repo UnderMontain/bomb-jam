@@ -17,9 +17,17 @@ signal cell_clicked(coord: Vector2i)
 const EXPLOTION = preload("uid://cnngjbksnqusx")
 
 func _ready() -> void:
+	centrar()
+	get_viewport().size_changed.connect(centrar)
 	build_grid()
 	VisualBus.cell_effect.connect(_on_animated_cells)
-	pass
+
+
+func centrar() -> void:
+	var viewport_size := get_viewport_rect().size
+	#var board_size := Vector2(8, 10) * 16 * 2
+	var offset := Vector2(-8, -40)
+	position = (viewport_size / 2) + offset
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion:
@@ -36,6 +44,9 @@ func _input(event: InputEvent) -> void:
 		var cell_click = get_cell()
 		if is_inside_grid(cell_click):
 			cell_clicked.emit(cell_click)
+
+#func replace_center_screen():
+	#var center: Vector2 = get_viewport_rect() / 2
 
 func build_grid():
 	var half_grid = Vector2i(grid_size / 2.0)
@@ -91,21 +102,6 @@ func deleate_entity(_entity:EntityState):
 		if cell_data[cell].content == _entity:
 			cell_data[cell].content = null
 			return
-##TODO Refactorizar animaciones
-#func apply_card(origin:Vector2i, card:CardInstance): 
-	#var cells_aplay = check_cells(origin, card.card_data.shape_rotated)
-	#for cell in cells_aplay:
-		#var explotion = EXPLOTION.instantiate() as AnimatedSprite2D
-		#explotion.global_position = tile_map_board.map_to_local(cell)
-		#add_child(explotion)
-		#explotion.get_node("GPUParticles2D").restart()
-		#explotion.animation_finished.connect(explotion.queue_free)
-	#for cell in cells_aplay:
-		#if cell_data[cell].content != null:
-			#cell_data[cell].content.died.connect(on_enemy_die)
-			#await cell_data[cell].content.take_damage(cell,card.card_data.damage)
- 
-
 
 func on_enemy_die(cell_position : Vector2i):
 	cell_data[cell_position].content = null
