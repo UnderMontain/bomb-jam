@@ -3,10 +3,11 @@
 [ext_resource type="Script" uid="uid://btibrt0s3cyvt" path="res://core/board.gd" id="1_ccdsy"]
 [ext_resource type="TileSet" uid="uid://dsxvn84tpp3qy" path="res://Resource/tile_map.tres" id="3_ic0bv"]
 [ext_resource type="Shader" uid="uid://ob6vnru2tvrs" path="res://Shaders/ray_light.gdshader" id="3_qt3id"]
+[ext_resource type="Shader" uid="uid://cus4kuy53g6yf" path="res://Shaders/fog.gdshader" id="5_rhq0n"]
 
 [sub_resource type="Gradient" id="Gradient_tln8a"]
-offsets = PackedFloat32Array(0.2356021, 0.47905758, 0.9921466)
-colors = PackedColorArray(18.892157, 18.892157, 18.892157, 0.6156863, 18.892157, 18.892157, 18.892157, 0, 18.892157, 18.892157, 18.892157, 0)
+offsets = PackedFloat32Array(0.27575758, 0.6454545)
+colors = PackedColorArray(1, 1, 1, 0.6627451, 1, 1, 1, 0.1882353)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qt3id"]
 gradient = SubResource("Gradient_tln8a")
@@ -39,15 +40,15 @@ turbulence_influence_max = 0.268
 shader = ExtResource("3_qt3id")
 shader_parameter/angle = -0.2
 shader_parameter/position = 0.08
-shader_parameter/spread = 0.3850000182875
-shader_parameter/cutoff = 0.11000005272500002
-shader_parameter/falloff = 1.0
-shader_parameter/edge_fade = 0.110000005225
-shader_parameter/speed = 1.955
+shader_parameter/spread = 0.32800001558
+shader_parameter/cutoff = 0.194000056715
+shader_parameter/falloff = 0.5290000251275
+shader_parameter/edge_fade = 0.06400000304
+shader_parameter/speed = 2.12
 shader_parameter/ray1_density = 12.765
-shader_parameter/ray2_density = 22.565
-shader_parameter/ray2_intensity = 0.67200003192
-shader_parameter/color = Color(0.09320182, 0.22658296, 0.30943933, 0.54200006)
+shader_parameter/ray2_density = 32.05
+shader_parameter/ray2_intensity = 0.4870000231325
+shader_parameter/color = Color(0.53333336, 0.21176471, 0.13725491, 0.78039217)
 shader_parameter/hdr = false
 shader_parameter/seed = 17.615
 
@@ -59,24 +60,73 @@ gradient = SubResource("Gradient_rhq0n")
 width = 512
 height = 512
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0p8uj"]
+shader = ExtResource("5_rhq0n")
+shader_parameter/densidad = 0.1610000076475
+shader_parameter/velocidad = 0.10000000475
+shader_parameter/escala = 2.010000047975
+shader_parameter/color_niebla = Color(2.3102762e-06, 0.8433574, 0.6017102, 1)
+
+[sub_resource type="Gradient" id="Gradient_gd7td"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7ak5b"]
+gradient = SubResource("Gradient_gd7td")
+width = 200
+height = 200
+
+[sub_resource type="Gradient" id="Gradient_qt3id"]
+offsets = PackedFloat32Array(0.6424242, 0.9818182)
+colors = PackedColorArray(0.52156866, 0.6, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e12pb"]
+gradient = SubResource("Gradient_qt3id")
+width = 200
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5knep"]
+gradient = SubResource("Gradient_qt3id")
+width = 200
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ic0bv"]
+gradient = SubResource("Gradient_qt3id")
+width = 200
+height = 200
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.5, 1)
+
 [node name="Board" type="Node2D" unique_id=282792504]
 process_mode = 3
 script = ExtResource("1_ccdsy")
 grid_size = Vector2i(7, 7)
 
 [node name="TileMapBackgroun" type="TileMapLayer" parent="." unique_id=537023504]
-tile_map_data = PackedByteArray("AAD8//z/AwABAAQAAAD9//z/AwACAAQAAAD+//z/AwADAAIAAAD///z/AwADAAQAAAAAAPz/AwACAAQAAAABAPz/AwAEAAQAAAACAPz/AwACAAIAAAAEAPz/AwAFAAQAAAADAPz/AwAEAAQAAAAEAP3/AwAGAAQAAAAEAP7/AwAFAAQAAAAEAP//AwAFAAQAAAAEAAAAAwAGAAQAAAAEAAEAAwAFAAQAAAAEAAIAAwAFAAQAAAAEAAMAAwAFAAQAAAAEAAQAAwAFAAUAAAABAAQAAwACAAUAAAACAAQAAwAEAAUAAAADAAQAAwAEAAUAAAD+/wQAAwADAAUAAAD//wQAAwAEAAUAAAAAAAQAAwADAAUAAAD8/wQAAwABAAUAAAD9/wQAAwACAAUAAAD8/wIAAwAAAAQAAAD8/wMAAwAAAAQAAAD8/wAAAwAAAAQAAAD8/wEAAwAAAAQAAAD8//7/AwAAAAQAAAD8////AwAAAAQAAAD8//3/AwAAAAQAAAD8/wUAAwABAAYAAAD9/wUAAwACAAYAAAD+/wUAAwACAAYAAAD//wUAAwACAAYAAAAAAAUAAwADAAYAAAABAAUAAwACAAYAAAACAAUAAwAEAAYAAAADAAUAAwAEAAYAAAAEAAUAAwAFAAYAAAD8//v/AwABAAMAAAAEAPv/AwAFAAMAAAD9//v/AwACAAMAAAD+//v/AwADAAEAAAD///v/AwADAAMAAAAAAPv/AwACAAMAAAABAPv/AwAEAAMAAAACAPv/AwACAAEAAAADAPv/AwAEAAMAAAA=")
+light_mask = 2
+tile_map_data = PackedByteArray("AAD8//z/AAABAAQAAAAEAP3/AAAFAAQAAAAEAP7/AAAFAAQAAAAEAP//AAAFAAQAAAAEAAAAAAAFAAQAAAAEAAEAAAAFAAQAAAAEAAIAAAAFAAQAAAAEAAMAAAAFAAQAAAAEAAQAAAAFAAUAAAABAAQAAAADAAUAAAACAAQAAAADAAcAAAADAAQAAAAEAAUAAAD+/wQAAAADAAUAAAD//wQAAAADAAcAAAAAAAQAAAADAAcAAAD8/wQAAAABAAUAAAD9/wQAAAACAAUAAAD8/wIAAAABAAQAAAD8/wMAAAABAAQAAAD8/wAAAAABAAQAAAD8/wEAAAABAAQAAAD8//7/AAABAAQAAAD8////AAABAAQAAAD8//3/AAABAAQAAAD8/wUAAAABAAYAAAD9/wUAAAACAAYAAAD+/wUAAAADAAYAAAD//wUAAAADAAYAAAAAAAUAAAADAAYAAAABAAUAAAADAAYAAAACAAUAAAADAAYAAAADAAUAAAAEAAYAAAAEAAUAAAAFAAYAAAD8//v/AAABAAMAAAD9//z/AAACAAIAAAD9//v/AAACAAEAAAD+//v/AAADAAEAAAD+//z/AAADAAIAAAD///z/AAADAAIAAAAAAPz/AAADAAIAAAABAPz/AAADAAIAAAACAPz/AAADAAIAAAD///v/AAADAAEAAAAAAPv/AAADAAEAAAABAPv/AAADAAEAAAACAPv/AAADAAEAAAADAPv/AAAEAAEAAAADAPz/AAAEAAIAAAAEAPv/AAAFAAMAAAAEAPz/AAAFAAQAAAA=")
 tile_set = ExtResource("3_ic0bv")
 
 [node name="TileMapBoard" type="TileMapLayer" parent="." unique_id=1230071170]
-tile_map_data = PackedByteArray("AAAAAAAAAAAKAAIAAAD//wAAAAAIAAIAAAD/////AAAKAAQAAAAAAP//AAAIAAIAAAABAAAAAAAKAAIAAAACAAAAAAAKAAIAAAABAP//AAAIAAQAAAABAP7/AAAIAAIAAAAAAP7/AAAIAAIAAAD///7/AAAIAAIAAAD+//7/AAAIAAQAAAD+////AAAIAAQAAAD+/wAAAAAIAAIAAAD+/wEAAAAJAAMAAAD//wEAAAAJAAEAAAAAAAEAAAAKAAQAAAABAAEAAAAKAAQAAAACAAEAAAAJAAMAAAD+/wIAAAAIAAQAAAD//wIAAAAJAAMAAAAAAAIAAAAIAAQAAAABAAIAAAAIAAIAAAACAAIAAAAJAAMAAAACAP//AAAKAAIAAAACAP7/AAAKAAQAAAADAP7/AAAJAAEAAAADAP//AAAKAAIAAAADAAAAAAAJAAEAAAADAAEAAAAIAAIAAAADAAIAAAAKAAQAAAADAAMAAAAKAAQAAAACAAMAAAAKAAIAAAABAAMAAAAJAAMAAAAAAAMAAAAJAAEAAAD//wMAAAAJAAMAAAD+/wMAAAAKAAIAAAD9/wMAAAAJAAMAAAD9/wIAAAAJAAEAAAD9/wEAAAAJAAEAAAD9/wAAAAAKAAIAAAD9////AAAJAAMAAAD9//7/AAAJAAEAAAD9//3/AAAKAAQAAAD+//3/AAAJAAMAAAD///3/AAAJAAEAAAAAAP3/AAAKAAIAAAABAP3/AAAIAAQAAAACAP3/AAAKAAIAAAADAP3/AAAKAAIAAAA=")
+light_mask = 6
+tile_map_data = PackedByteArray("AAAAAAAABAABAAIAAAD//wAABAACAAMAAAD/////BAACAAEAAAAAAP//BAABAAIAAAABAAAABAAAAAEAAAACAAAABAAAAAMAAAABAP//BAAAAAMAAAABAP7/BAAAAAEAAAAAAP7/BAACAAEAAAD///7/BAAAAAEAAAD+//7/BAACAAEAAAD+////BAACAAMAAAD+/wAABAACAAEAAAD+/wEABAACAAEAAAD//wEABAACAAEAAAAAAAEABAABAAAAAAABAAEABAACAAMAAAACAAEABAABAAIAAAD+/wIABAAAAAMAAAD//wIABAAAAAEAAAAAAAIABAACAAMAAAABAAIABAACAAMAAAACAAIABAABAAIAAAACAP//BAABAAAAAAACAP7/BAACAAEAAAADAP7/BAAAAAMAAAADAP//BAAAAAMAAAADAAAABAAAAAMAAAADAAEABAAAAAEAAAADAAIABAACAAEAAAADAAMABAABAAIAAAACAAMABAABAAIAAAABAAMABAABAAAAAAAAAAMABAABAAAAAAD//wMABAAAAAEAAAD+/wMABAAAAAMAAAD9/wMABAABAAAAAAD9/wIABAABAAAAAAD9/wEABAAAAAMAAAD9/wAABAAAAAEAAAD9////BAABAAIAAAD9//7/BAAAAAEAAAD9//3/BAACAAEAAAD+//3/BAAAAAEAAAD///3/BAABAAAAAAAAAP3/BAABAAIAAAABAP3/BAABAAAAAAACAP3/BAAAAAEAAAADAP3/BAAAAAMAAAA=")
 tile_set = ExtResource("3_ic0bv")
 
 [node name="TileMapDeco" type="TileMapLayer" parent="." unique_id=1917531909]
-tile_map_data = PackedByteArray("AAD9//3/AQACAAsAAAD+//7/AQADAAwAAAD+//3/AQADAAsAAAD///3/AQAEAAsAAAAAAP3/AQAFAAsAAAABAP3/AQAGAAsAAAACAP3/AQAHAAsAAAADAP3/AQAIAAsAAAADAP7/AQAIAAwAAAADAP//AQAIAA0AAAADAAAAAQAIAA4AAAADAAEAAQAIAA8AAAADAAIAAQAIABAAAAADAAMAAQAIABEAAAACAAMAAQAHABEAAAABAAMAAQAFABEAAAAAAAMAAQAEABEAAAD//wMAAQAHABEAAAD+/wMAAQAFABEAAAD9/wMAAQACABEAAAD9/wIAAQACABAAAAD9/wEAAQACABAAAAD9/wAAAQACABAAAAD9////AQACAA8AAAD9//7/AQACABAAAAD///7/AQAGAAwAAAABAP7/AQAEAAwAAAAAAP7/AQAEAAwAAAACAP//AQAHAA8AAAACAAAAAQAHAA4AAAACAAEAAQAHAA0AAAACAP7/AQAHAAwAAAACAAIAAQAHABAAAAABAAIAAQAEABAAAAAAAAIAAQAEABAAAAD//wIAAQAGABAAAAD+/wIAAQADABAAAAA=")
+light_mask = 6
+tile_map_data = PackedByteArray("AAD+//7/AQADAAwAAAADAP7/AQAIAAwAAAADAP//AQATAAMAAAADAAAAAQATAAQAAAADAAEAAQAIAA8AAAADAAIAAQAIABAAAAADAAMAAQAIABEAAAACAAMAAQAHABEAAAABAAMAAQAFABEAAAAAAAMAAQAEABEAAAD//wMAAQAHABEAAAD+/wMAAQAFABEAAAD9/wMAAQACAA4AAAD9/wIAAQACAA4AAAD9/wEAAQACAA4AAAD9/wAAAQACAA4AAAD9////AQACAA4AAAD9//7/AQACAA4AAAD///7/AQAQAAEAAAABAP7/AQASAAEAAAAAAP7/AQARAAEAAAACAP//AQASAAMAAAACAAAAAQASAAQAAAACAAEAAQAHAA0AAAACAP7/AQAHAAwAAAACAAIAAQAUAAIAAAABAAIAAQATAAIAAAAAAAIAAQASAAIAAAD//wIAAQARAAIAAAD+/wIAAQAQAAIAAAABAP//AQARAAMAAAABAAAAAQARAAQAAAD+//z/AQANAAEAAAACAPz/AQANAAEAAAD9//3/AQACAAsAAAD+//3/AQADAAsAAAD///3/AQAEAAsAAAAAAP3/AQAFAAsAAAABAP3/AQAGAAsAAAACAP3/AQAHAAsAAAADAP3/AQAIAAsAAAA=")
 tile_set = ExtResource("3_ic0bv")
+occlusion_enabled = false
 
 [node name="TileMapPreview" type="TileMapLayer" parent="." unique_id=230338157]
+light_mask = 2
 tile_set = ExtResource("3_ic0bv")
 
 [node name="Grid" type="Node2D" parent="." unique_id=1276212841]
@@ -90,6 +140,51 @@ preprocess = 4.0
 process_material = SubResource("ParticleProcessMaterial_ic0bv")
 
 [node name="Sunshine" type="Sprite2D" parent="." unique_id=1101812199]
+light_mask = 0
+z_index = 1
 material = SubResource("ShaderMaterial_ic0bv")
 position = Vector2(-8, -43)
 texture = SubResource("GradientTexture2D_0p8uj")
+
+[node name="fog" type="Sprite2D" parent="." unique_id=281962512]
+light_mask = 4
+material = SubResource("ShaderMaterial_0p8uj")
+texture = SubResource("GradientTexture2D_7ak5b")
+region_enabled = true
+region_rect = Rect2(0, 0, 600, 500)
+
+[node name="Torch" type="Node2D" parent="." unique_id=1217724926]
+position = Vector2(-24, -57)
+
+[node name="PointLight2D_Iluminacion" type="PointLight2D" parent="Torch" unique_id=1622328067]
+energy = 0.7
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_e12pb")
+height = 16.0
+
+[node name="PointLight2D_Shadow" type="PointLight2D" parent="Torch" unique_id=1198618717]
+energy = 0.3
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 4
+texture = SubResource("GradientTexture2D_5knep")
+height = 16.0
+
+[node name="Torch2" type="Node2D" parent="." unique_id=189958891]
+position = Vector2(41, -59)
+
+[node name="PointLight2D_Iluminacion" type="PointLight2D" parent="Torch2" unique_id=395611978]
+energy = 0.2
+shadow_color = Color(0, 0, 0, 1)
+texture = SubResource("GradientTexture2D_ic0bv")
+texture_scale = 2.0
+height = 16.0
+
+[node name="PointLight2D_Shadow" type="PointLight2D" parent="Torch2" unique_id=2096151113]
+energy = 0.3
+range_item_cull_mask = 2
+shadow_enabled = true
+shadow_item_cull_mask = 4
+texture = SubResource("GradientTexture2D_ic0bv")
+texture_scale = 2.0
+height = 16.0

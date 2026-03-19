@@ -1,12 +1,20 @@
 [gd_scene format=3 uid="uid://crfdvfd3ero57"]
 
-[ext_resource type="Script" uid="uid://b6lnkaa2ddwm3" path="res://core/main.gd" id="1_3gdo0"]
+[ext_resource type="Script" uid="uid://dex6mvovfc0t" path="res://core/main.gd" id="1_3gdo0"]
 [ext_resource type="PackedScene" uid="uid://svgbetl60cqx" path="res://core/board.tscn" id="1_xiose"]
-[ext_resource type="Script" uid="uid://chwfdj4l0c3nu" path="res://core/UI/ui_manager.gd" id="2_ge7io"]
+[ext_resource type="Script" uid="uid://dtwx7afo5xiyj" path="res://core/UI/ui_manager.gd" id="2_ge7io"]
 [ext_resource type="PackedScene" uid="uid://c44cllj2gd2lo" path="res://core/deck.tscn" id="4_xa854"]
 [ext_resource type="PackedScene" uid="uid://dbjbcuwcbbtr8" path="res://core/hand.tscn" id="5_kagtj"]
-[ext_resource type="Script" uid="uid://yse84ek06upa" path="res://Entities/player.gd" id="13_7ua4h"]
-[ext_resource type="FontFile" uid="uid://cl83uo0avcov3" path="res://Fonts/PeaberryBase.ttf" id="14_ntwa4"]
+[ext_resource type="Script" uid="uid://ygrbmllgcrsv" path="res://Entities/player.gd" id="13_7ua4h"]
+[ext_resource type="FontFile" uid="uid://bin10g4cwfsc2" path="res://Fonts/PeaberryBase.ttf" id="14_ntwa4"]
+
+[sub_resource type="Environment" id="Environment_cus2n"]
+background_mode = 3
+tonemap_mode = 3
+glow_enabled = true
+glow_intensity = 1.03
+glow_bloom = 0.04
+adjustment_enabled = true
 
 [sub_resource type="LabelSettings" id="LabelSettings_7ua4h"]
 font = ExtResource("14_ntwa4")
@@ -19,23 +27,17 @@ colors = PackedColorArray(0, 0.13725491, 0.13333334, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_brq4u"]
 gradient = SubResource("Gradient_cus2n")
-width = 600
+width = 800
 height = 400
-
-[sub_resource type="Environment" id="Environment_brq4u"]
-background_mode = 3
-reflected_light_source = 1
-tonemap_mode = 3
-adjustment_enabled = true
-adjustment_brightness = 0.84
-adjustment_contrast = 0.95
-adjustment_saturation = 1.18
 
 [node name="Main" type="Node2D" unique_id=1782264961 node_paths=PackedStringArray("player", "GUI")]
 texture_filter = 1
 script = ExtResource("1_3gdo0")
 player = NodePath("Player")
 GUI = NodePath("CanvasLayer/GUI")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1471465854]
+environment = SubResource("Environment_cus2n")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1170183774]
 
@@ -50,11 +52,14 @@ mouse_filter = 2
 script = ExtResource("2_ge7io")
 
 [node name="HandUI" type="Control" parent="CanvasLayer/GUI" unique_id=215368016]
-anchors_preset = 0
-offset_left = 640.0
-offset_top = 640.0
-offset_right = 640.0
-offset_bottom = 640.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 0
 mouse_filter = 1
 
 [node name="Life" type="Label" parent="CanvasLayer/GUI" unique_id=1206794456]
@@ -108,20 +113,18 @@ label_settings = SubResource("LabelSettings_7ua4h")
 
 [node name="PositionCard" type="Control" parent="CanvasLayer/GUI" unique_id=1608037674]
 anchors_preset = 0
-offset_left = 937.0
-offset_top = 323.0
-offset_right = 977.0
-offset_bottom = 363.0
+offset_left = 336.0
+offset_top = 137.0
+offset_right = 376.0
+offset_bottom = 177.0
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1097003032]
+light_mask = 0
+position = Vector2(210, 137)
 texture = SubResource("GradientTexture2D_brq4u")
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1467866459]
-zoom = Vector2(3, 3)
-process_callback = 0
-
 [node name="Board" parent="." unique_id=2034127296 instance=ExtResource("1_xiose")]
-position = Vector2(-8, -32)
+position = Vector2(202, 105)
 
 [node name="Deck" parent="." unique_id=2145467262 instance=ExtResource("4_xa854")]
 
@@ -130,5 +133,12 @@ position = Vector2(-8, -32)
 [node name="Player" type="Node" parent="." unique_id=184404170]
 script = ExtResource("13_7ua4h")
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1471465854]
-environment = SubResource("Environment_brq4u")
+[node name="Enviroment" type="CanvasModulate" parent="." unique_id=1987160048]
+position = Vector2(-24, -16)
+color = Color(0.3515629, 0.3515629, 0.35156286, 1)
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="." unique_id=450761831]
+color = Color(0.49411765, 1, 0.84705883, 1)
+energy = 0.3
+height = 0.17
+max_distance = 0.0

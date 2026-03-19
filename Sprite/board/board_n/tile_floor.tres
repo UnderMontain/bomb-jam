@@ -1,0 +1,11 @@
+[gd_resource type="AtlasTexture" format=3 uid="uid://4gie27asou4n"]
+
+[ext_resource type="Texture2D" uid="uid://diat5sv8hlnm3" path="res://Sprite/board/board_n/piso2.png" id="1_0r5wu"]
+[ext_resource type="Texture2D" uid="uid://b45r2puchmgjs" path="res://Sprite/board/board_n/piso.png" id="2_ka46g"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_rxiwi"]
+diffuse_texture = ExtResource("1_0r5wu")
+normal_texture = ExtResource("2_ka46g")
+
+[resource]
+atlas = SubResource("CanvasTexture_rxiwi")

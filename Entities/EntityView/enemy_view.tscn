@@ -1,10 +1,51 @@
 [gd_scene format=3 uid="uid://bh21r7036d7r4"]
 
-[ext_resource type="Script" uid="uid://d3id73ftqafrh" path="res://Entities/EntityView/enemy_view.gd" id="1_u060l"]
+[ext_resource type="Script" uid="uid://bxrxkfygcw1d4" path="res://Entities/EntityView/enemy_view.gd" id="1_u060l"]
+[ext_resource type="Texture2D" uid="uid://3gmg6eut1dq5" path="res://Sprite/board/pruebatilesetupdate.png" id="2_laovq"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_laovq"]
+polygon = PackedVector2Array(-5, -3, 4, -3, 6, 2, -5, 2)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7u2ie"]
+atlas = ExtResource("2_laovq")
+region = Rect2(192, 96, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_eefyi"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7u2ie")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_laovq"]
+offsets = PackedFloat32Array(0.19557196, 0.5276753, 0.900369)
+colors = PackedColorArray(1, 1, 1, 0.3529412, 1, 1, 1, 0.0727272, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7u2ie"]
+gradient = SubResource("Gradient_laovq")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.7905983, 0.1965812)
 
 [node name="EnemyView" type="Node2D" unique_id=542000125]
 script = ExtResource("1_u060l")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="." unique_id=1850861164]
+light_mask = 2
+occluder = SubResource("OccluderPolygon2D_laovq")
+occluder_light_mask = 4
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=725982013]
 position = Vector2(0, -12)
+sprite_frames = SubResource("SpriteFrames_eefyi")
 autoplay = "default"
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=222019240]
+visible = false
+energy = 2.31
+blend_mode = 2
+texture = SubResource("GradientTexture2D_7u2ie")
