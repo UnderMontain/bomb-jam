@@ -67,9 +67,8 @@ func update_layout():
 	var count := cards.size()
 	if count == 0:
 		return
-
 	var spacing_angle := deg_to_rad(8.0)
-	var radius        := 600.0
+	var radius        := 400.0
 	var mid           := (count - 1) / 2.0
 
 	for i in range(count):
@@ -78,15 +77,14 @@ func update_layout():
 		var t     := 0.0 if mid == 0 else idx / mid
 		var angle := t * (spacing_angle * mid)
 
-		# Centro de la carta sobre el arco (relativo a HandUI)
 		var arc_pos := Vector2(
 			sin(angle) * radius,
 			-cos(angle) * radius + radius
 		)
-
-		# ← Aqui esta la clave: corregir top-left → centro
-		var target_position := arc_pos - card.size / 2
-		card.set_parameter(target_position,angle)
-		card.animate_to(target_position, angle,
+		print("Carta ", i, " pos: ", arc_pos, " | rotation: ", rad_to_deg(angle), "°")
+		card.set_parameter(arc_pos, angle)
+		card.animate_to(
+			arc_pos, angle,
 			MouseFilter.MOUSE_FILTER_IGNORE,
-			MouseFilter.MOUSE_FILTER_PASS)
+			MouseFilter.MOUSE_FILTER_PASS
+		)
