@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://dqn46nrpxfne"]
 
-[ext_resource type="Script" uid="uid://b7x5xevdroga5" path="res://Resource/entitys/enemy_data.gd" id="1_4vx3w"]
+[ext_resource type="Script" uid="uid://worjypu75hg4" path="res://Resource/entitys/enemy_data.gd" id="1_4vx3w"]
 [ext_resource type="Texture2D" uid="uid://3gmg6eut1dq5" path="res://Sprite/board/pruebatilesetupdate.png" id="2_xnaxt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xgy7b"]

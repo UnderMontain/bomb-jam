@@ -81,7 +81,6 @@ func update_layout():
 			sin(angle) * radius,
 			-cos(angle) * radius + radius
 		)
-		print("Carta ", i, " pos: ", arc_pos, " | rotation: ", rad_to_deg(angle), "°")
 		card.set_parameter(arc_pos, angle)
 		card.animate_to(
 			arc_pos, angle,

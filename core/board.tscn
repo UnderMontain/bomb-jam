@@ -1,9 +1,9 @@
 [gd_scene format=4 uid="uid://svgbetl60cqx"]
 
-[ext_resource type="Script" uid="uid://btibrt0s3cyvt" path="res://core/board.gd" id="1_ccdsy"]
+[ext_resource type="Script" uid="uid://beo5pprn8yo68" path="res://core/board.gd" id="1_ccdsy"]
 [ext_resource type="TileSet" uid="uid://dsxvn84tpp3qy" path="res://Resource/tile_map.tres" id="3_ic0bv"]
-[ext_resource type="Shader" uid="uid://ob6vnru2tvrs" path="res://Shaders/ray_light.gdshader" id="3_qt3id"]
-[ext_resource type="Shader" uid="uid://cus4kuy53g6yf" path="res://Shaders/fog.gdshader" id="5_rhq0n"]
+[ext_resource type="Shader" uid="uid://b2aw5gkq2yjd1" path="res://Shaders/ray_light.gdshader" id="3_qt3id"]
+[ext_resource type="Shader" uid="uid://42cd06mf6hh0" path="res://Shaders/fog.gdshader" id="5_rhq0n"]
 
 [sub_resource type="Gradient" id="Gradient_tln8a"]
 offsets = PackedFloat32Array(0.27575758, 0.6454545)
@@ -77,8 +77,8 @@ width = 200
 height = 200
 
 [sub_resource type="Gradient" id="Gradient_qt3id"]
-offsets = PackedFloat32Array(0.6424242, 0.9818182)
-colors = PackedColorArray(0.52156866, 0.6, 0, 1, 0, 0, 0, 1)
+offsets = PackedFloat32Array(0.2939815, 0.6805556)
+colors = PackedColorArray(0.6276518, 1, 0.612119, 1, 0.62782896, 1, 0.61222285, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_e12pb"]
 gradient = SubResource("Gradient_qt3id")
@@ -111,7 +111,7 @@ grid_size = Vector2i(7, 7)
 
 [node name="TileMapBackgroun" type="TileMapLayer" parent="." unique_id=537023504]
 light_mask = 2
-tile_map_data = PackedByteArray("AAD8//z/AAABAAQAAAAEAP3/AAAFAAQAAAAEAP7/AAAFAAQAAAAEAP//AAAFAAQAAAAEAAAAAAAFAAQAAAAEAAEAAAAFAAQAAAAEAAIAAAAFAAQAAAAEAAMAAAAFAAQAAAAEAAQAAAAFAAUAAAABAAQAAAADAAUAAAACAAQAAAADAAcAAAADAAQAAAAEAAUAAAD+/wQAAAADAAUAAAD//wQAAAADAAcAAAAAAAQAAAADAAcAAAD8/wQAAAABAAUAAAD9/wQAAAACAAUAAAD8/wIAAAABAAQAAAD8/wMAAAABAAQAAAD8/wAAAAABAAQAAAD8/wEAAAABAAQAAAD8//7/AAABAAQAAAD8////AAABAAQAAAD8//3/AAABAAQAAAD8/wUAAAABAAYAAAD9/wUAAAACAAYAAAD+/wUAAAADAAYAAAD//wUAAAADAAYAAAAAAAUAAAADAAYAAAABAAUAAAADAAYAAAACAAUAAAADAAYAAAADAAUAAAAEAAYAAAAEAAUAAAAFAAYAAAD8//v/AAABAAMAAAD9//z/AAACAAIAAAD9//v/AAACAAEAAAD+//v/AAADAAEAAAD+//z/AAADAAIAAAD///z/AAADAAIAAAAAAPz/AAADAAIAAAABAPz/AAADAAIAAAACAPz/AAADAAIAAAD///v/AAADAAEAAAAAAPv/AAADAAEAAAABAPv/AAADAAEAAAACAPv/AAADAAEAAAADAPv/AAAEAAEAAAADAPz/AAAEAAIAAAAEAPv/AAAFAAMAAAAEAPz/AAAFAAQAAAA=")
+tile_map_data = PackedByteArray("AAD8//z/AAABAAQAAAAEAP3/AAAFAAQAAAAEAP7/AAAFAAQAAAAEAP//AAAFAAQAAAAEAAAAAAAFAAQAAAAEAAEAAAAFAAQAAAAEAAIAAAAFAAQAAAAEAAMAAAAFAAQAAAAEAAQAAAAFAAUAAAABAAQAAAADAAUAAAACAAQAAAADAAcAAAADAAQAAAAEAAUAAAD+/wQAAAADAAUAAAD//wQAAAADAAcAAAAAAAQAAAADAAcAAAD8/wQAAAABAAUAAAD9/wQAAAACAAUAAAD8/wIAAAABAAQAAAD8/wMAAAABAAQAAAD8/wAAAAABAAQAAAD8/wEAAAABAAQAAAD8//7/AAABAAQAAAD8////AAABAAQAAAD8//3/AAABAAQAAAD8/wUAAAABAAYAAAD9/wUAAAACAAYAAAD+/wUAAAADAAYAAAD//wUAAAADAAYAAAAAAAUAAAADAAYAAAABAAUAAAADAAYAAAACAAUAAAADAAYAAAADAAUAAAAEAAYAAAAEAAUAAAAFAAYAAAD8//v/AAABAAMAAAD9//z/AwACAAQAAAD9//v/AwACAAMAAAD+//v/AwADAAMAAAD+//z/AwADAAQAAAD///z/AwACAAQAAAAAAPz/AwADAAQAAAABAPz/AwACAAQAAAACAPz/AwADAAQAAAD///v/AwAEAAMAAAAAAPv/AwADAAMAAAABAPv/AwAEAAMAAAACAPv/AwADAAMAAAADAPv/AwAEAAMAAAADAPz/AwAEAAQAAAAEAPv/AAAFAAMAAAAEAPz/AAAFAAQAAAA=")
 tile_set = ExtResource("3_ic0bv")
 
 [node name="TileMapBoard" type="TileMapLayer" parent="." unique_id=1230071170]
@@ -132,6 +132,7 @@ tile_set = ExtResource("3_ic0bv")
 [node name="Grid" type="Node2D" parent="." unique_id=1276212841]
 
 [node name="Dust" type="GPUParticles2D" parent="." unique_id=241512726]
+visible = false
 position = Vector2(7, 16)
 amount = 100
 texture = SubResource("GradientTexture2D_qt3id")
@@ -140,6 +141,7 @@ preprocess = 4.0
 process_material = SubResource("ParticleProcessMaterial_ic0bv")
 
 [node name="Sunshine" type="Sprite2D" parent="." unique_id=1101812199]
+visible = false
 light_mask = 0
 z_index = 1
 material = SubResource("ShaderMaterial_ic0bv")
@@ -147,6 +149,7 @@ position = Vector2(-8, -43)
 texture = SubResource("GradientTexture2D_0p8uj")
 
 [node name="fog" type="Sprite2D" parent="." unique_id=281962512]
+visible = false
 light_mask = 4
 material = SubResource("ShaderMaterial_0p8uj")
 texture = SubResource("GradientTexture2D_7ak5b")
@@ -154,26 +157,32 @@ region_enabled = true
 region_rect = Rect2(0, 0, 600, 500)
 
 [node name="Torch" type="Node2D" parent="." unique_id=1217724926]
+visible = false
 position = Vector2(-24, -57)
 
 [node name="PointLight2D_Iluminacion" type="PointLight2D" parent="Torch" unique_id=1622328067]
+visible = false
 energy = 0.7
 shadow_color = Color(0, 0, 0, 1)
 texture = SubResource("GradientTexture2D_e12pb")
 height = 16.0
 
 [node name="PointLight2D_Shadow" type="PointLight2D" parent="Torch" unique_id=1198618717]
-energy = 0.3
+energy = 0.6
+blend_mode = 2
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_item_cull_mask = 4
 texture = SubResource("GradientTexture2D_5knep")
-height = 16.0
+texture_scale = 1.4
+height = 80.0
 
 [node name="Torch2" type="Node2D" parent="." unique_id=189958891]
+visible = false
 position = Vector2(41, -59)
 
 [node name="PointLight2D_Iluminacion" type="PointLight2D" parent="Torch2" unique_id=395611978]
+visible = false
 energy = 0.2
 shadow_color = Color(0, 0, 0, 1)
 texture = SubResource("GradientTexture2D_ic0bv")
@@ -181,10 +190,12 @@ texture_scale = 2.0
 height = 16.0
 
 [node name="PointLight2D_Shadow" type="PointLight2D" parent="Torch2" unique_id=2096151113]
+visible = false
 energy = 0.3
+blend_mode = 2
 range_item_cull_mask = 2
 shadow_enabled = true
 shadow_item_cull_mask = 4
 texture = SubResource("GradientTexture2D_ic0bv")
 texture_scale = 2.0
-height = 16.0
+height = 80.0

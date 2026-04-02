@@ -25,13 +25,13 @@ config/icon="res://icon.svg"
 GameManager="*res://autoload/game_manager.gd"
 Audio="*res://autoload/Audio.tscn"
 SceneManager="*res://autoload/scene_manager.gd"
-VisualBus="*uid://bbqovrv3dqd0l"
+VisualBus="*uid://br15ibyw0tyca"
+PlayerState="*uid://pnc1wb35jpjk"
 
 [display]
 
 window/size/viewport_width=480
 window/size/viewport_height=270
-window/size/mode=3
 window/stretch/mode="canvas_items"
 window/stretch/aspect="keep_height"
 window/stretch/scale_mode="integer"

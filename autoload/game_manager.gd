@@ -12,6 +12,8 @@ var state: GameState
 var action_queue: Array[Action] = []
 var global_modifires: Array[Modifier] = []
 
+var inventary: Array[ItemData] = []
+
 var current_main : Main
 var current_board : Board
 var deck: Deck
@@ -25,6 +27,7 @@ const DECK_DEFAULT = preload("uid://do4mp2duh8ga5")
 const ENEMY_VIEW = preload("uid://bh21r7036d7r4")
 const ENEMY_BASE_DATA = preload("uid://dqn46nrpxfne")
 
+const KNIFE = preload("uid://creojg71va1on")
 
 
 var has_hovered_cell: bool
@@ -38,10 +41,16 @@ signal cost_changed (current_cost:int, cost_max: int)
 
 func _ready() -> void:
 	state = GameState.IDLE
+	inventary.append(KNIFE)
 
 func _start():
-	var cards: Array[CardData] = DECK_DEFAULT.cards as Array[CardData]
+	#var cards: Array[CardData] = DECK_DEFAULT.cards as Array[CardData]
+	#deck.create_deck(cards)
+	var cards:Dictionary[CardData,int]
+	for item in inventary:
+		cards[item.card_template] = item.amount
 	deck.create_deck(cards)
+	
 	next_wave()
 	for i in 2:
 		var card:CardInstance = deck.draw()
@@ -74,6 +83,7 @@ func process_enqueue():
 
 ## Se Debe usar strignames definidos en la clase EventTypes
 func emit_event(event_type:StringName, data:Dictionary):
+	print("Evento emitido: " + event_type)
 	for mod in get_all_modifiers():
 		var reation:Action = mod.on_event(event_type,data)
 		

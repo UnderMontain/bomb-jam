@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bh21r7036d7r4"]
 
-[ext_resource type="Script" uid="uid://bxrxkfygcw1d4" path="res://Entities/EntityView/enemy_view.gd" id="1_u060l"]
+[ext_resource type="Script" uid="uid://d3id73ftqafrh" path="res://Entities/EntityView/enemy_view.gd" id="1_u060l"]
 [ext_resource type="Texture2D" uid="uid://3gmg6eut1dq5" path="res://Sprite/board/pruebatilesetupdate.png" id="2_laovq"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_laovq"]

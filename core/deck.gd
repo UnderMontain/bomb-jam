@@ -6,12 +6,13 @@ var draw_pile: Array[CardInstance] = []
 var discard_pile: Array[CardInstance] = []
 
 
-func create_deck(cards: Array[CardData]):
+func create_deck(cards: Dictionary[CardData,int]):
 	draw_pile.clear()
 	discard_pile.clear()
 	for card in cards:
-		var new_card = CardInstance.new(card)
-		draw_pile.append(new_card)
+		for i in cards[card]:
+			var new_card = CardInstance.new(card)
+			draw_pile.append(new_card)
 
 ##TODO Corregir retorno de draw si no hay mas cartas ni en la pila ni en el descarte
 func draw() -> CardInstance:
