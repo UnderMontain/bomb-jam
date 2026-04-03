@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://svgbetl60cqx"]
 
-[ext_resource type="Script" uid="uid://beo5pprn8yo68" path="res://core/board.gd" id="1_ccdsy"]
+[ext_resource type="Script" uid="uid://masgfu2fwyan" path="res://core/board.gd" id="1_ccdsy"]
 [ext_resource type="TileSet" uid="uid://dsxvn84tpp3qy" path="res://Resource/tile_map.tres" id="3_ic0bv"]
-[ext_resource type="Shader" uid="uid://b2aw5gkq2yjd1" path="res://Shaders/ray_light.gdshader" id="3_qt3id"]
+[ext_resource type="Shader" uid="uid://ob6vnru2tvrs" path="res://Shaders/ray_light.gdshader" id="3_qt3id"]
 [ext_resource type="Shader" uid="uid://42cd06mf6hh0" path="res://Shaders/fog.gdshader" id="5_rhq0n"]
 
 [sub_resource type="Gradient" id="Gradient_tln8a"]

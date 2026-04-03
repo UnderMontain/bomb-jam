@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dnd583ggekiml"]
 
-[ext_resource type="Script" uid="uid://dpou6o4t07mjo" path="res://autoload/music_manager.gd" id="1_c7q73"]
-[ext_resource type="AudioStream" uid="uid://c5casaoagcoly" path="res://Sounds/Music/bruno.mp3" id="2_cd7xo"]
-[ext_resource type="AudioStream" uid="uid://qn6cntmsji8d" path="res://Sounds/Music/bata.mp3" id="3_m6xkc"]
+[ext_resource type="Script" uid="uid://bh3pcsm0m6iwe" path="res://autoload/music_manager.gd" id="1_c7q73"]
+[ext_resource type="AudioStream" uid="uid://ccnrrpgihrd2e" path="res://Sounds/Music/bruno.mp3" id="2_cd7xo"]
+[ext_resource type="AudioStream" uid="uid://hihu2gpkv3w4" path="res://Sounds/Music/bata.mp3" id="3_m6xkc"]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" unique_id=842724333]
 script = ExtResource("1_c7q73")
 tracks = Array[AudioStream]([ExtResource("2_cd7xo"), ExtResource("3_m6xkc")])

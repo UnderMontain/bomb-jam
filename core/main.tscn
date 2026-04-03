@@ -1,12 +1,12 @@
 [gd_scene format=3 uid="uid://crfdvfd3ero57"]
 
-[ext_resource type="Script" uid="uid://b6lnkaa2ddwm3" path="res://core/main.gd" id="1_3gdo0"]
+[ext_resource type="Script" uid="uid://c0tj3ngwbm4ta" path="res://core/main.gd" id="1_3gdo0"]
 [ext_resource type="PackedScene" uid="uid://svgbetl60cqx" path="res://core/board.tscn" id="1_xiose"]
-[ext_resource type="Script" uid="uid://chwfdj4l0c3nu" path="res://core/UI/ui_manager.gd" id="2_ge7io"]
+[ext_resource type="Script" uid="uid://co1753j65rxsj" path="res://core/UI/ui_manager.gd" id="2_ge7io"]
 [ext_resource type="PackedScene" uid="uid://c44cllj2gd2lo" path="res://core/deck.tscn" id="4_xa854"]
 [ext_resource type="PackedScene" uid="uid://dbjbcuwcbbtr8" path="res://core/hand.tscn" id="5_kagtj"]
-[ext_resource type="Script" uid="uid://yse84ek06upa" path="res://Entities/player.gd" id="13_7ua4h"]
-[ext_resource type="FontFile" uid="uid://cl83uo0avcov3" path="res://Fonts/PeaberryBase.ttf" id="14_ntwa4"]
+[ext_resource type="Script" uid="uid://ygrbmllgcrsv" path="res://Entities/player.gd" id="13_7ua4h"]
+[ext_resource type="FontFile" uid="uid://bin10g4cwfsc2" path="res://Fonts/PeaberryBase.ttf" id="14_ntwa4"]
 
 [sub_resource type="Environment" id="Environment_cus2n"]
 background_mode = 3

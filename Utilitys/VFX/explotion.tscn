@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://cnngjbksnqusx"]
 
-[ext_resource type="Texture2D" uid="uid://cp1073807o4e5" path="res://Sprite/explotion_sprite.png" id="1_eodo4"]
+[ext_resource type="Texture2D" uid="uid://cgcfiad8mcq2a" path="res://Sprite/explotion_sprite.png" id="1_eodo4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_eodo4"]
 atlas = ExtResource("1_eodo4")
@@ -135,11 +135,11 @@ gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_coyjd")
 turbulence_enabled = true
 
-[node name="Explotion" type="AnimatedSprite2D"]
+[node name="Explotion" type="AnimatedSprite2D" unique_id=1917161522]
 sprite_frames = SubResource("SpriteFrames_m4wys")
 autoplay = "default"
 
-[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." unique_id=698875305]
 emitting = false
 amount = 20
 texture = SubResource("AtlasTexture_m4wys")

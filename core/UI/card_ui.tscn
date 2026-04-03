@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b556hhae3hfcb"]
 
-[ext_resource type="Script" uid="uid://csg2jvsqx1xvw" path="res://core/UI/card_ui.gd" id="1_2yy3o"]
-[ext_resource type="Texture2D" uid="uid://c0s4117j3guxd" path="res://Sprite/carta.png" id="2_f1dva"]
+[ext_resource type="Script" uid="uid://b8tvlu2jg8lah" path="res://core/UI/card_ui.gd" id="1_2yy3o"]
+[ext_resource type="Texture2D" uid="uid://bsypqw0nktrnn" path="res://Sprite/carta.png" id="2_f1dva"]
 [ext_resource type="FontFile" uid="uid://bin10g4cwfsc2" path="res://Fonts/PeaberryBase.ttf" id="3_rm57c"]
-[ext_resource type="Texture2D" uid="uid://cqihn2u7dkinr" path="res://Sprite/Form2-export.png" id="4_t8bav"]
+[ext_resource type="Texture2D" uid="uid://ca3pyebsoxn8g" path="res://Sprite/Form2-export.png" id="4_t8bav"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_t8bav"]
 font = ExtResource("3_rm57c")

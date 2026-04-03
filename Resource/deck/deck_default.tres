@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DeckDefinition" format=3 uid="uid://do4mp2duh8ga5"]
 
-[ext_resource type="Script" uid="uid://p7lu0ibbbg0s" path="res://Resource/card_data.gd" id="1_f67tc"]
-[ext_resource type="Script" uid="uid://bcwvg2obukbjm" path="res://core/combat/deck_definition.gd" id="1_oaurx"]
+[ext_resource type="Script" uid="uid://nmshpadenbek" path="res://Resource/card_data.gd" id="1_f67tc"]
+[ext_resource type="Script" uid="uid://dkxhncokxq5v6" path="res://core/combat/deck_definition.gd" id="1_oaurx"]
 [ext_resource type="Resource" uid="uid://tlh1ak8cdgra" path="res://Resource/card_I.tres" id="2_0kwq0"]
 [ext_resource type="Resource" uid="uid://0aay4u2rwvdl" path="res://Resource/card_L.tres" id="3_jg85w"]
 
