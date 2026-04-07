@@ -25,7 +25,7 @@ config/icon="res://icon.svg"
 GameManager="*res://autoload/game_manager.gd"
 Audio="*res://autoload/Audio.tscn"
 SceneManager="*res://autoload/scene_manager.gd"
-VisualBus="*uid://bbqovrv3dqd0l"
+VisualBus="*uid://br15ibyw0tyca"
 
 [display]
 
