@@ -1,0 +1,156 @@
+[gd_scene format=3 uid="uid://emw62jll6x1x"]
+
+[ext_resource type="Texture2D" uid="uid://ca3pyebsoxn8g" path="res://Sprite/Form2-export.png" id="1_5ih6f"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l73ev"]
+atlas = ExtResource("1_5ih6f")
+region = Rect2(32, 32, 32, 32)
+
+[node name="InventoryUI" type="Control" unique_id=1729532760]
+custom_minimum_size = Vector2(200, 100)
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -50.0
+offset_right = 60.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="." unique_id=499716714]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+columns = 8
+
+[node name="TextureRect" type="TextureRect" parent="GridContainer" unique_id=1617283975]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect2" type="TextureRect" parent="GridContainer" unique_id=1804637568]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect3" type="TextureRect" parent="GridContainer" unique_id=1387557645]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect4" type="TextureRect" parent="GridContainer" unique_id=1516618480]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect5" type="TextureRect" parent="GridContainer" unique_id=1525365675]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect6" type="TextureRect" parent="GridContainer" unique_id=7134846]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect7" type="TextureRect" parent="GridContainer" unique_id=1207520963]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect8" type="TextureRect" parent="GridContainer" unique_id=1681794795]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect9" type="TextureRect" parent="GridContainer" unique_id=1601351836]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect10" type="TextureRect" parent="GridContainer" unique_id=796136715]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect11" type="TextureRect" parent="GridContainer" unique_id=486085549]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect12" type="TextureRect" parent="GridContainer" unique_id=335242331]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect13" type="TextureRect" parent="GridContainer" unique_id=1367250974]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect14" type="TextureRect" parent="GridContainer" unique_id=491012433]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect15" type="TextureRect" parent="GridContainer" unique_id=1987606682]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect16" type="TextureRect" parent="GridContainer" unique_id=105818114]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect17" type="TextureRect" parent="GridContainer" unique_id=42861112]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect18" type="TextureRect" parent="GridContainer" unique_id=1091428276]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect19" type="TextureRect" parent="GridContainer" unique_id=685125673]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect20" type="TextureRect" parent="GridContainer" unique_id=1104676369]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect21" type="TextureRect" parent="GridContainer" unique_id=1144796801]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect22" type="TextureRect" parent="GridContainer" unique_id=1625430535]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect23" type="TextureRect" parent="GridContainer" unique_id=967618987]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect24" type="TextureRect" parent="GridContainer" unique_id=55044448]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect25" type="TextureRect" parent="GridContainer" unique_id=644099169]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect26" type="TextureRect" parent="GridContainer" unique_id=13242681]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect27" type="TextureRect" parent="GridContainer" unique_id=266143806]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect28" type="TextureRect" parent="GridContainer" unique_id=63801218]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect29" type="TextureRect" parent="GridContainer" unique_id=815011354]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect30" type="TextureRect" parent="GridContainer" unique_id=1976260553]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect31" type="TextureRect" parent="GridContainer" unique_id=2140332105]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
+
+[node name="TextureRect32" type="TextureRect" parent="GridContainer" unique_id=417642497]
+layout_mode = 2
+texture = SubResource("AtlasTexture_l73ev")
